@@ -1,0 +1,16 @@
+.create-todo {
+    margin-top: 6em; 
+}
+
+input, textarea {
+    background: #f3f3f3;
+    padding: 33px;
+    text-align: left;
+    border: none;
+    box-shadow: 0 2px #00000029;
+    font-size: 23px;
+}
+button {
+    margin: 14px 17px;
+    padding: 0 22px;
+}
