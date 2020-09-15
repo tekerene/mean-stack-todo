@@ -1,20 +1,59 @@
+
+
 .create-todo {
-    margin-top: 6em; 
+    margin-top: 4em; 
+    padding: 12px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin-left: 3em;
+    margin-right: 3em;
+     height: 80vh;
 }
 
 input, textarea {
-    background: #f3f3f3;
+    background: #F3F3F3;
     padding: 33px;
     text-align: left;
     border: none;
-    box-shadow: 0 2px #00000029;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 5px;
     font-size: 23px;
 }
-.input-date {
-    width: 65%;
+.form-group {
+    margin-bottom: 2em;
+    border: 1px solid #F3F3F3;
 }
-button {
-    margin: 2px 15px;
-    padding: 17px 33px;
+ .input-date {
     width: 30%;
+    font-size: 1.8em;
+    margin: 0.5em 0em;
+}
+ button {
+    margin: 0px 13px;
+    padding: 9px 32px;
+    border-radius: 10px;
+    font-size: 1.9em;
+    color: #fff;
+    font-weight: 700;
+    background-color: #F79623;
+} 
+.date {
+    padding: 10px;
+}
+.border {
+    padding: 12px;
+}
+.dateTime {
+    width: 30%;
+    font-size: 1.8em !important;
+    margin: 0.5em 0em !important;
+    border-radius: 10px;
+}
+.custom-file-label {
+    background: #6A6A6A;
+    border: none;
+    box-shadow: 0 2px #00000029;
+    font-size: 23px;
+    font-weight: 600;
+    color: #fff;
 }

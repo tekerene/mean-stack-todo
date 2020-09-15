@@ -1,9 +1,8 @@
 .todo-banner{
     background-image: url(../assets/img/Groupe40.svg);
     width: 100%;
-    overflow: hidden;
-    height: 100%; 
-    max-height: 100%; ;
+    /* overflow: hidden; */
+    height: 100vh; 
 }
 .todo-banner img {
     width: 100%;

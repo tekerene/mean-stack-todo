@@ -39,7 +39,7 @@ const server = app.listen(port, () => {
 /**
  *@test 
  */ 
-app.get('/', req, res {})
+
 app.use((req, res, next) => {
   res.send('welcome to our todo app')
 //   next(createError(404));
