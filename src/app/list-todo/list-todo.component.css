@@ -1,0 +1,36 @@
+.list-todo {
+    margin-top: 6em; 
+}
+.card {
+    width: 100%;
+    min-height: 200px;
+    display: -webkit-inline-box;
+    flex-direction: column;
+    background: rgb(250, 243, 243);
+    position: relative;
+    margin-bottom: 1em;
+}
+.card-header {
+    width: 25%;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+}
+.card-body {
+    width: 75%;
+    background: rgb(179, 176, 176);
+}
+.custom-control {
+    position: absolute;
+    right: 0;
+    top: 5%;
+}
+.custom-control input {
+    font-size: 2em;
+}
+.card-title {
+    color:orange;
+    font-size: 2em;
+}

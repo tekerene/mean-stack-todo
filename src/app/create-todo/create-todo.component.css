@@ -10,7 +10,11 @@ input, textarea {
     box-shadow: 0 2px #00000029;
     font-size: 23px;
 }
+.input-date {
+    width: 65%;
+}
 button {
-    margin: 14px 17px;
-    padding: 0 22px;
+    margin: 2px 15px;
+    padding: 17px 33px;
+    width: 30%;
 }
