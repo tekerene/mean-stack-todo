@@ -1,47 +1,50 @@
 let express = require('express'),
-  database = require('./database'),
+  // database = require('./config/database'),
   bodyParser = require('body-parser'),
-  mongoose = require('mongoose');
-
+  mongoose = require('mongoose'),
+  cors = require('cors')
+const db = require("./models/index");
 // Connect mongoDB
-mongoose.Promise = global.Promise;
-mongoose.connect(database.db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log("Database connected")
-  },
-  error => {
-    console.log("Database could't be connected to: " + error)
-  }
-)
 
- const todoAPI = require('./routes/todo.route')
+
+//  const todoAPI = require('./routes/todo')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
-
 /**
  * @API   
  */
-app.use('/api', todoAPI)
+// app.use('/api', todoAPI)
+
+var corsOptions = {
+  origin: "http://localhost:4000"
+};
+
+/**
+ * cors  
+ */
+
+ app.use(cors(corsOptions)); 
 
 /**
  * @Create port  
  */
+
+require("./routes/todo")(app);
+
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log('Connected to Localhost' + port)
 })
+
 /**
  *@test 
  */ 
 
 app.use((req, res, next) => {
-  res.send('welcome to our todo app')
+  // res.send('welcome to our todo app')
 //   next(createError(404));
 });
 

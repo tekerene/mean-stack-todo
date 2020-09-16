@@ -1,18 +1,15 @@
-.todo-banner{
-    background-image: url(../assets/img/Groupe40.svg);
+.todo-banner {
+    background-image: url('../assets/img/Groupe40.svg');
     width: 100%;
-    /* overflow: hidden; */
-    height: 100vh; 
+    overflow: scro;
+    height: 100vh;
 }
 .todo-banner img {
     width: 100%;
     height: 500px;
 }
 .create {
-    position:relative;
+    position: relative;
     overflow-y: hidden;
 }
 
-.main-banner .col-md-7 {
-    overflow-y: scroll;
-}

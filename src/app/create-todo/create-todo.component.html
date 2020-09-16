@@ -6,27 +6,33 @@
 
 <div class="create-todo">
     <form action="">
-        <div class="">
+        <div *ngIf="!submitted">
             <div class="form-group">
-                <label for=""></label>
-                <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+                <label for="title"></label>
+                <input type="text" name="title" [(ngModel)]="todoData.title" class="form-control" id="title"
+                    placeholder="Title" required>
             </div>
             <div class="form-group">
-                <label for=""></label>
-                <textarea name="" id="" class="form-control" cols="" rows="7" placeholder="Description"></textarea>
+                <label for="desc"></label>
+                <textarea name="desc" id="desc" class="form-control" required [(ngModel)]="todoData.desc" cols=""
+                    rows="7" placeholder="Description"></textarea>
                 <p class="text-left">280max</p>
             </div>
             <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                <label for="image"></label>
+                <input type="file" name="image" [(ngModel)]="todoData.imageUrl" class="custom-file-input" id="image" required>
                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                 <div class="invalid-feedback"></div>
             </div>
             <div class="form-group d-flex">
-                <input class="dateTime" type="text" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control" placeholder="20-05-2020"/>
-                <button class="btn-lg">Add</button>
+                <input class="dateTime" type="text" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"
+                    placeholder="20-05-2020" />
+                <button (click)="saveTodo()" class="btn-lg">Add</button>
             </div>
-            <div></div>
+            <div *ngIf="submitted">
+                <h4>You submitted successfully!</h4>
+                <button class="btn btn-success" (click)="newTodo()">Add</button>
+              </div>
         </div>
     </form>
 </div>
-

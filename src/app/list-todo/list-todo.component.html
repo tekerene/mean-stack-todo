@@ -1,54 +1,91 @@
-<div class="list-todo">
+<div class="list-todo" *ngFor="let todo of todoData; let i = index" [class.active]="i == currentIndex"
+  (click)="setActiveTodo(todo, i)">
+  {{ tutorial.title }}>
 
+  <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTodo()">
+    Remove All
+  </button> -->
   <!-- on state task susccess -->
 
-  <div class="card complete">
+  <div class="card complete" *ngIf="currentTodo">
+    <div class="card-header">
+      276x291
+    </div>
+    <div class="card-body">
+      <h5 class="card-title mb-3">{{ currentTodo.title }}</h5>
+      <p class="card-text">{{ currentTodo.description }}</p>
+      <h4 class="mt-4">22-05-2020, 12:00</h4>
+    </div>
+    <div class="custom-control ">
+      <i class="fa fa-check-circle"></i>
+    </div>
+  </div>
+  <label><strong>Status:</strong></label>
+  {{ currentTodo.published ? "Published" : "Pending" }}
+
+<!-- <div class="card complete">
     <div class="card-header">
       276x291
     </div>
     <div class="card-body">
       <h5 class="card-title mb-3">Title</h5>
       <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
-        recusandae! Asperiores fugiat voluptatum perspiciatis soluta totam commodi facilis dicta voluptas.</p>
+        recusandae!  commodi facilis dicta voluptas.</p>
       <h4 class="mt-4">22-05-2020, 12:00</h4>
     </div>
     <div class="custom-control ">
       <i class="fa fa-check-circle"></i>
     </div>
+  </div> -->
+
+
+<!-- on state tasks in process  -->
+
+<div class="card default">
+  <div class="card-header">
+    276x291
   </div>
-
-  <!-- on state tasks in process  -->
-
-  <div class="card default">
-    <div class="card-header">
-      276x291
-    </div>
-    <div class="card-body def-body">
-      <h5 class="card-title mb-3">Title</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
-        recusandae! Asperiores fugiat voluptatum perspiciatis soluta totam commodi facilis dicta voluptas.</p>
-      <h4 class="mt-4">22-05-2020, 12:00</h4>
-    </div>
-    <div class="custom-control ">
-      <i class="fa fa-check-circle"></i>
-    </div>
+  <div class="card-body def-body">
+    <h5 class="card-title mb-3">Title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
+      recusandae! commodi facilis dicta voluptas.</p>
+    <h4 class="mt-4">22-05-2020, 12:00</h4>
   </div>
-
-  <!-- on state not completed -->
-
-  <div class="card taskFail">
-    <div class="card-header">
-      276x291
-    </div>
-    <div class="card-body def-body">
-      <h5 class="card-title mb-3">Title</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
-        recusandae! Asperiores fugiat voluptatum perspiciatis soluta totam commodi facilis dicta voluptas.</p>
-      <h4 class="mt-4">22-05-2020, 12:00</h4>
-    </div>
-    <div class="custom-control ">
-     <i class="fa fa-check-circle"></i>
-       <i class="fa fa-exclamation"></i>
-    </div>
+  <div class="custom-control ">
+    <i class="fa fa-check-circle"></i>
   </div>
+</div>
+
+<!-- on state not completed -->
+
+<div class="card taskFail">
+  <div class="card-header">
+    276x291
+  </div>
+  <div class="card-body def-body">
+    <h5 class="card-title mb-3">Title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
+      recusandae! commodi facilis dicta voluptas.</p>
+    <h4 class="mt-4">22-05-2020, 12:00</h4>
+  </div>
+  <div class="custom-control ">
+    <i class="fa fa-check-circle"></i>
+    <i class="fa fa-exclamation"></i>
+  </div>
+</div>
+<div class="card taskFail">
+  <div class="card-header">
+    276x291
+  </div>
+  <div class="card-body def-body">
+    <h5 class="card-title mb-3">Title</h5>
+    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
+      recusandae! commodi facilis dicta voluptas.</p>
+    <h4 class="mt-4">22-05-2020, 12:00</h4>
+  </div>
+  <div class="custom-control ">
+    <i class="fa fa-check-circle"></i>
+    <i class="fa fa-exclamation"></i>
+  </div>
+</div>
 </div>

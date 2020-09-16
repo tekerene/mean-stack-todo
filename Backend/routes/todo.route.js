@@ -16,11 +16,21 @@ todoRoute.route('/').get((req, res) => {
 
  todoRoute.route('/create-todo').post((req, res, next) => {
     TodoModel.create(req.body, (error, data) => {
-    if (error) {
+   if (!req.body.title){
+    res.status(400).send({ message: "Content can not be empty!" });
+    
+      if (error) {
       return next(error)
     } else {
       res.json(data)
     }
+  }
+  // Create a Todo
+  const todo = new TodoModel({
+    title: req.body.title,
+    description: req.body.description,
+    published: req.body.published ? req.body.published : false
+  });
   })
 });
 
