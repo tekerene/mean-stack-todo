@@ -1,13 +1,11 @@
 
 
 .create-todo {
-    margin-top: 4em; 
-    padding: 12px;
+    margin: 4em 2em 1em 3em;
+    padding: 6px 9px 6px 5px;
     border: 1px solid #000;
     border-radius: 5px;
-    margin-left: 3em;
-    margin-right: 3em;
-     height: 78vh;
+    height: 56vh;
 }
 
 input, textarea {
@@ -56,4 +54,74 @@ input, textarea {
     font-size: 20px;
     font-weight: 600;
     color: #fff;
+}
+/*  Medium devices (desktop, 1440px and 2056px) */
+@media (min-width: 1442.98px) and (max-width: 2565px) { 
+    .create-todo {
+        margin: 20em 6em 5em 6em;
+        padding: 32px 34px 21px 30px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 34vh;
+    }
+}
+
+/*  Medium devices (laptop, 1024px and up to 1440px) */
+@media (min-width: 1022px) and (max-width: 1442.98px) { 
+    .create-todo {
+        margin: 4em 1em 1em 2em;
+        padding: 5px 16px 6px 15px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 54vh;
+    }
+}
+
+/*  Medium devices (tablets, 768px and 1024px) */
+@media (min-width: 768px) and (max-width: 1022px) { 
+    .create-todo {
+        margin: 4em 0em 1em 0em;
+        padding: 0px 5px 20px 5px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 82vh;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up to 767.98 width) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .create-todo {
+        margin: 0em 1em 2em 1em;
+        padding: 0px 35px 0px 34px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 137vh;
+    }
+ }
+
+/*  Small devices (landscape phones, 576px and below) */
+@media (max-width: 576px) {
+    .create-todo {
+        margin: 0em 0em 10em 0em;
+        padding: 0px 20px 0px 20px;
+        border: 1px solid #000;
+        border-radius: 5px;
+        height: 116vh;
+    }
+    button {
+        margin: 0px -10px;
+        padding: 4px 11px;
+        border-radius: 10px;
+        font-size: 1.5em;
+        color: #fff;
+        font-weight: 700;
+        background-color: #F79623;
+    } 
+    textarea {
+        padding: 10px;
+    }
+    .form-group {
+        margin-bottom: 0.4em;
+        border: 1px solid #F3F3F3;
+    }
 }
