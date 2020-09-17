@@ -1,24 +1,27 @@
 <div class="list-todo">
-  <p *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></p>
-  
+  <!-- <tr *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></tr>
+   -->
 
 <div *ngIf="todoData.length > 0">
 
-  <div class="card complete" *ngFor="let todo of todoData; let i = index">
+  <div *ngFor="let todo of todoData; let i = index" class="card  taskFail">
     <div class="card-header">
       {{todo.imageUrl}}
     </div>
-    <div class="card-body">
+    <div class="card-body def-body">
       <h5 class="card-title mb-3">{{ todo.title }}</h5>
       <p class="card-text">{{ todo.desc }}</p>
-      <h4 class="mt-4">22-05-2020, 12:00</h4>
+      <h4 class="mt-4">{{todo.createdAt}}0</h4>
     </div>
     <div class="custom-control ">
       <i class="fa fa-check-circle"></i>
     </div>
+    <!-- <button class="bg-warning">delete</button> -->
   </div>
 </div>
-<!-- <div class="card complete">
+
+
+<div class="card complete">
     <div class="card-header">
       276x291
     </div>
@@ -31,8 +34,7 @@
     <div class="custom-control ">
       <i class="fa fa-check-circle"></i>
     </div>
-  </div> -->
-
+  </div>
 
 <!-- on state tasks in process  -->
 
@@ -52,7 +54,7 @@
 </div>
 
 <!-- on state not completed -->
-
+<!-- 
 <div class="card taskFail">
   <div class="card-header">
     276x291
@@ -67,7 +69,8 @@
     <i class="fa fa-check-circle"></i>
     <i class="fa fa-exclamation"></i>
   </div>
-</div>
+</div> -->
+
 <div class="card taskFail">
   <div class="card-header">
     276x291

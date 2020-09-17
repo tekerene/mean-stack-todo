@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Todo } from '../model/todo';
 
 
 
@@ -11,6 +12,7 @@ import { catchError, map } from 'rxjs/operators';
   export class TodoService {
 
      baseUri:string = 'http://localhost:4000/api';
+     basecreate:string = 'http://localhost:4000/api/create';
      headers = new HttpHeaders().set('Content-Type', 'application/json');
   
     constructor(private http: HttpClient) { }
@@ -23,13 +25,23 @@ import { catchError, map } from 'rxjs/operators';
     //   return this.http.get(`${baseUrl}/${id}`);
     // }
   
-    createTodo(data): Observable<any> {
+    createTodo(data: Todo): Observable<any> {
+      console.log(data)
       let url = `${this.baseUri}/create`;
       return this.http.post(url, data)
       .pipe(
         catchError(this.errorMgmt)
-      )
+             ) 
+      
     }
+    // createTodo(data): Observable<any> {
+      
+    //   return this.http.post(this.baseUri, data)
+    //   .pipe(
+    //     catchError(this.errorMgmt)
+       
+    //   ) 
+    // }
   errorMgmt(errorMgmt: any): import("rxjs").OperatorFunction<Object, any> {
     throw new Error('Method not implemented.');
   }

@@ -2,13 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let TodoSchema = new Schema({
-  name: {
+  title: {
     type: String
   },
   desc: {
     type: String
   },
   imageUrl: {
+    type: String
+  },
+  date: {
     type: String
   },
   published: {

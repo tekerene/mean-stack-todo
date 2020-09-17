@@ -24,7 +24,7 @@ export class ListTodoComponent implements OnInit {
       this.todoData = data;
         });
   }
-  removeEmployee(todo, index) {
+  removeTodo(todo, index) {
     if(window.confirm('Are you sure?')) {
         this.todoService.deleteTodo(todo._id).subscribe((data) => {
           this.todoData.splice(index, 1);

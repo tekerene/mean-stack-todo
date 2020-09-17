@@ -1,5 +1,6 @@
 export class Todo {
-    name: string;
+    title: string;
     desc: string;
     imageUrl: string;
+    date: String;
 }

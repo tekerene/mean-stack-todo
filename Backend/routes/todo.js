@@ -1,11 +1,11 @@
-// const todoControllers = require("../controller/todoController");
-module.exports = app => {
-    const todos = require("../controller/todoController");
+//const todoControllers = require("../controller/todoController");
+// module.exports = app => {
+     const todos = require("../controller/todoController");
   
     var router = require("express").Router();
   
     // Create a new Todo
-    router.post("/", todos.create);
+    router.post("/create", todos.create);
   
     // Retrieve all todos
     router.get("/", todos.findAll);
@@ -17,13 +17,15 @@ module.exports = app => {
     router.get("/:id", todos.findOne);
   
     // Update a Todo with id
-    router.put("/:id", todos.update);
+    router.put("/edit:id", todos.update);
   
     // Delete a Todo with id
-    router.delete("/:id", todos.delete);
+    router.delete("/delete:id", todos.delete);
   
     // Create a new Todo
-    router.delete("/", todos.deleteAll);
+    router.delete("/deleteAll", todos.deleteAll);
   
-    app.use('/api/todos', router);
-  };
+    // app.use('/api/', router);
+  
+ //};
+  module.exports = router;

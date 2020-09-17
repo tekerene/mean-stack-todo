@@ -13,7 +13,7 @@
     min-height: 200px;
     display: -webkit-inline-box;
     flex-direction: column;
-    background: rgb(250, 243, 243);
+    background: rgb(184, 172, 172);
     position: relative;
     margin-bottom: 1em;
     box-shadow: 0 0 20px #00000029;
@@ -90,11 +90,11 @@
     color: #707070;
 }
 .taskFail .custom-control i:last-child {
-    color: #fff;
+    /* color: #fff;
     padding: 0 15px;
     border-radius: 50%;
-    background-color: #f79623;
-    font-size: 2.8em;
+    background-color: #707070;
+    font-size: 2.8em; */
 }
 
 /*  Medium devices (desktop, 1440px and 2056px) */
@@ -107,7 +107,7 @@
         min-height: 200px;
         display: -webkit-inline-box;
         flex-direction: column;
-        background: rgb(250, 243, 243);
+        background: #303148;
         position: relative;
         margin-bottom: 1em;
         box-shadow: 0 0 20px #00000029;
@@ -120,11 +120,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #f3f3f3;
+        background: #707070;
         border-radius: 5px 0 0 5px;
         opacity: 1;
         font-size: 2em;
-        color: #707070;
+        color: #000;
     }
     .card-body {
         width: 76%;
@@ -173,7 +173,7 @@
         min-height: 200px;
         display: -webkit-inline-box;
         flex-direction: column;
-        background: rgb(250, 243, 243);
+        background: #303c50 !important;
         position: relative;
         margin-bottom: 1em;
         box-shadow: 0 0 20px #00000029;
@@ -190,7 +190,7 @@
         border-radius: 5px 0 0 5px;
         opacity: 1;
         font-size: 2em;
-        color: #707070;
+        color: #303148;
     }
     .card-body {
         width: 67%;
@@ -214,13 +214,13 @@
         margin-top: 5px;
     }
     .def-body {
-        color: #707070;
+        color: #303148;
     }
     .def-body p {
-        color: #707070;
+        color:#303148;
     }
     .default .custom-control i {
-        color: #707070;
+        color: #303148;
     }
 }
 /*  Medium devices (tablets, 768px and 1024px) */
