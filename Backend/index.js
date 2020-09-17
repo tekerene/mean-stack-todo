@@ -1,56 +1,57 @@
 let express = require('express'),
-  // database = require('./config/database'),
-  bodyParser = require('body-parser'),
-  mongoose = require('mongoose'),
-  cors = require('cors')
-const db = require("./models/index");
-// Connect mongoDB
+    path = require('path'),
+    mongoose = require('mongoose'),
+    cors = require('cors'),
+    bodyParser = require('body-parser'),
+    dbConfig = require('./database/db');
 
+   // Connecting with mongo db
 
-//  const todoAPI = require('./routes/todo')
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+    mongoose.Promise = global.Promise;
+    mongoose.connect(dbConfig.db, {
+      useNewUrlParser: true
+    }).then(() => {
+          console.log('Database sucessfully connected')
+      },
+      error => {
+          console.log('Database could not connected: ' + error)
+      }
+    ) 
+
+      // Setting up port with express js
+  const todoRoute = require('./routes/todo.route')
+    const app = express();
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({
+      extended: false
+    }));
 /**
- * @API   
+ * @API cors  
  */
-// app.use('/api', todoAPI)
+    app.use(cors()); 
+    app.use(express.static(path.join(__dirname, 'dist/mean-stack-todo')));
+    app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-todo')));
+    app.use('/api', todoRoute)
 
-var corsOptions = {
-  origin: "http://localhost:4000"
-};
 
-/**
- * cors  
- */
+    /**
+   * @Create port  
+   */
+    const port = process.env.PORT || 4000;
+    const server = app.listen(port, () => {
+      console.log('Connected to port ' + port)
+    })
 
- app.use(cors(corsOptions)); 
+    // Find 404 and hand over to error handler
+    app.use((req, res, next) => {
+      // next(createError(404));
+    });
 
-/**
- * @Create port  
- */
 
-require("./routes/todo")(app);
 
-const port = process.env.PORT || 4000;
-const server = app.listen(port, () => {
-  console.log('Connected to Localhost' + port)
-})
-
-/**
- *@test 
- */ 
-
-app.use((req, res, next) => {
-  // res.send('welcome to our todo app')
-//   next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  console.error(err.message);
-  if (!err.statusCode) err.statusCode = 500;
-  res.status(err.statusCode).send(err.message);
-});
+    // error handler
+    app.use(function (err, req, res, next) {
+      console.error(err.message); // Log error message in our server's console
+      if (!err.statusCode) err.statusCode = 500; // If err has no specified error code, set error code to 'Internal Server Error (500)'
+      res.status(err.statusCode).send(err.message); // All HTTP requests must have a response, so let's send back an error with its status code and message
+    });

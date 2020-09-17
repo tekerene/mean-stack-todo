@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import  { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
+import { TodoService } from './services/todo.service';
 
 import { AppComponent } from './app.component';
 import { CreateTodoComponent } from './create-todo/create-todo.component';
@@ -28,7 +29,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgxDaterangepickerMd.forRoot(),
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

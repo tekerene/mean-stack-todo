@@ -2,7 +2,7 @@ const express = require('express');
 const todoRoute = express.Router();
 
 // todo model
-let TodoModel = require('../models/todoSchema');
+let TodoModel = require('../models/TodoSchema');
 
 todoRoute.route('/').get((req, res) => {
     TodoModel.find((error, data) => {

@@ -1,28 +1,23 @@
-<div class="list-todo" *ngFor="let todo of todoData; let i = index" [class.active]="i == currentIndex"
-  (click)="setActiveTodo(todo, i)">
-  {{ tutorial.title }}>
+<div class="list-todo">
+  <p *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></p>
+  
 
-  <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTodo()">
-    Remove All
-  </button> -->
-  <!-- on state task susccess -->
+<div *ngIf="todoData.length > 0">
 
-  <div class="card complete" *ngIf="currentTodo">
+  <div class="card complete" *ngFor="let todo of todoData; let i = index">
     <div class="card-header">
-      276x291
+      {{todo.imageUrl}}
     </div>
     <div class="card-body">
-      <h5 class="card-title mb-3">{{ currentTodo.title }}</h5>
-      <p class="card-text">{{ currentTodo.description }}</p>
+      <h5 class="card-title mb-3">{{ todo.title }}</h5>
+      <p class="card-text">{{ todo.desc }}</p>
       <h4 class="mt-4">22-05-2020, 12:00</h4>
     </div>
     <div class="custom-control ">
       <i class="fa fa-check-circle"></i>
     </div>
   </div>
-  <label><strong>Status:</strong></label>
-  {{ currentTodo.published ? "Published" : "Pending" }}
-
+</div>
 <!-- <div class="card complete">
     <div class="card-header">
       276x291
