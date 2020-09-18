@@ -18,7 +18,7 @@ todoRoute.route('/').get((req, res) => {
 todoRoute.route('/create').post((req, res, next) => {
     TodoModel.create(req.body, (error, data) => { // validation request
          console.log(req.body)
-        if (req.body.title || req.body.desc || req.body.imageUrl) {
+        if (!req.body.title || !req.body.desc || !req.body.imageUrl || !req.body.date) {
             return res.status(400).send({message: "Required field Cant be empty"})
         }
         // * Create a Task
@@ -27,8 +27,8 @@ todoRoute.route('/create').post((req, res, next) => {
             title: req.body.title, 
             description: req.body.desc,
             published: req.body.published,
-            dateTime: req.body.timestamps
-        });
+            date: req.body.date
+        })
         // Save save to database
         task.save((err) => {
             if (err) {

@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: false}));
  * @API cors  
  */
 app.use(cors());
+app.options('*', cors());
 app.use(express.static(path.join(__dirname, 'dist/mean-stack-todo')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-todo')));
 app.use('/api', todoRoute)

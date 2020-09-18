@@ -3,9 +3,8 @@
 /**
  * @todo controller to create, findAll, fineOne, update, delete, deleteAll,
  */
- //Const todoSchema = require('../models/todoSchema');
+ 
 const Todo = require("../models/TodoSchema");
-
 
 exports.create = (req, res)=>{
 
@@ -22,10 +21,10 @@ exports.create = (req, res)=>{
   const task = new Todo({
     title: req.body.title,
     desc: req.body.desc,
-     imageUrl: req.body.imageUrl,
-    date: req.body.date,
-  });
-  // Save save to database
+    imageUrl: req.body.imageUrl,
+    date: req.body.date
+  })
+  // Save to database
 task.save((err)=>{
   if(err){
     res.send('err')
@@ -33,18 +32,9 @@ task.save((err)=>{
   }
   else{
     res.send(req.body)
-  
   }
 })
-  // task.save().then((data)=>{
-  //   res.send(data);
-  // }).catch((er)=>{
-  //   res.status(500).send({
-  //     message:  "Some Errors While Creating This Task"
-  //   })
-  // })
 }
-
   /**
    * find all todos
    */

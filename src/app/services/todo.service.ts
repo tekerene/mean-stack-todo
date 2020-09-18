@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { empty, Observable, ObservableInput, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Todo } from '../model/todo';
 
@@ -14,15 +14,16 @@ import { Todo } from '../model/todo';
      baseUri:string = 'http://localhost:4000/api';
      basecreate:string = 'http://localhost:4000/api/create';
      headers = new HttpHeaders().set('Content-Type', 'application/json');
+  errorMgmt: (err: any, caught: Observable<any>) => ObservableInput<any>;
   
     constructor(private http: HttpClient) { }
   
     // getAll(): Observable<any> {
-    //   return this.http.get(baseUrl);
+    //   return this.http.get(this.baseUri);
     // }
   
     // get(id): Observable<any> {
-    //   return this.http.get(`${baseUrl}/${id}`);
+    //   return this.http.get(`${this.baseUri}/${id}`);
     // }
   
     createTodo(data: Todo): Observable<any> {
@@ -30,21 +31,20 @@ import { Todo } from '../model/todo';
       let url = `${this.baseUri}/create`;
       return this.http.post(url, data)
       .pipe(
-        catchError(this.errorMgmt)
-             ) 
-      
+        map(
+          res => {
+            return res;
+          }
+        ), catchError((error) => {
+          return throwError(error);
+        })
+      );
     }
-    // createTodo(data): Observable<any> {
-      
-    //   return this.http.post(this.baseUri, data)
-    //   .pipe(
-    //     catchError(this.errorMgmt)
-       
-    //   ) 
-    // }
-  errorMgmt(errorMgmt: any): import("rxjs").OperatorFunction<Object, any> {
-    throw new Error('Method not implemented.');
-  }
+  
+ 
+  // errorMgmt(errorMgmt: any): import("rxjs").OperatorFunction<Object, any> {
+  //   throw new Error('Method not implemented.');
+  // }
    // Get all employees
    getTodos() {
     return this.http.get(`${this.baseUri}`);
