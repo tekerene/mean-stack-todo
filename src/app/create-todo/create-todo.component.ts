@@ -78,6 +78,11 @@ import { TodoService } from '../services/todo.service';
 })
 export class CreateTodoComponent implements OnInit {
   submitted = false;
+  inputVal = 0;
+  textVal = 0;
+  text = 0;
+  inputMax = 0;
+ 
   selected: {startDate: Moment, endDate: Moment};
   constructor(  private fb: FormBuilder, public todoService: TodoService) { }
   todoForm = this.fb.group({
@@ -86,14 +91,8 @@ export class CreateTodoComponent implements OnInit {
     imageUrl: ['', [Validators.required]],
     date: ['', [Validators.required]],
   });
-  // taskForm = new FormGroup({
-  //   title: new FormControl('Rene'),
-  //   description: new FormControl(''),
-  //   dateTime: new FormControl(''),
-  //   images: new FormControl(''),
-  // });
   ngOnInit(): void {
-    // this.TodoService.createTodo()
+   
   }
 onSubmit(){
   this.submitted = true;
@@ -108,5 +107,14 @@ onSubmit(){
     window.location.reload();
   });
 }
+}
+wordCount(e) {
+  this.inputVal = this.inputMax + e.target.value.length;
+ 
+  console.log(e);
+}
+ textCount(e) {
+   this.textVal = this.text + e.target.value.length;
+ console.log(e);
 }
 }

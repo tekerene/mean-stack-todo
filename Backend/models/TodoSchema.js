@@ -12,7 +12,8 @@ let TodoSchema = new Schema({
     type: String
   },
   date: {
-    type: String
+    startDate: String ,
+    endDate: String
   },
   published: {
     type: Boolean
