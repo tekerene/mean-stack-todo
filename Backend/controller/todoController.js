@@ -5,8 +5,43 @@
  */
  const uploadImage = require('../util/imgUpload')
 const Todo = require("../models/TodoSchema");
+ const multer = require('multer');
+ const mongoose = require('mongoose');
 
-exports.create = (req, res)=>{
+
+
+// Multer File upload settings
+const DIR = './public/';
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR);
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(' ').join('-');
+    cb(null, fileName)
+  }
+});
+
+
+// Multer Mime Type Validation
+var upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 10
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+    }
+  }
+});
+
+
+exports.create = (req, res, next)=>{
 
   // validation request
 
@@ -18,6 +53,7 @@ exports.create = (req, res)=>{
    } 
 
   console.log(req.body)
+  const url = req.protocol + '://' + req.get('host')
 
   // * Create a Task
   const task = new Todo({
@@ -25,18 +61,29 @@ exports.create = (req, res)=>{
     desc: req.body.desc,
     imageUrl: req.body.imageUrl,
     date: req.body.date,
+    _id: new mongoose.Types.ObjectId(),
+    avatar: url + '/public/' + req.file.filename
   })
 
   // Save to database
-task.save((err)=>{
+task.save((err, result)=>{
   if(err){
     res.send('err')
     console.log(err)
   }
   else{
-    //uploadImage({name: fields.imageUrl, path: fields.req.file.filename ,type: fields.imageUrl})
+    res.status(201).json({
+      message: "Todo registered successfully!",
+      userCreated: {
+        _id: result._id,
+        avatar: result.avatar
+        
+      }
+      
+    })
     res.send(req.body)
   }
+  console.log(userCreated.avatar)
 })
 }
   /**
@@ -54,7 +101,8 @@ task.save((err)=>{
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving todos."
+            err.message || "Some error occurred while retrieving todos.",
+            todo:data
         });
       });
   };

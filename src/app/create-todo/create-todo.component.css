@@ -1,6 +1,6 @@
 .create-todo {
-    margin: 4em 2em 1em 3em;
-    padding: 6px 9px 6px 5px;
+    margin: 6em 2em 1em 3em;
+    padding: 6px 12px 6px 12px;
     border: 1px solid #000;
     border-radius: 5px;
     height: 73vh;
@@ -9,7 +9,7 @@
 
 input,
 textarea {
-    background: #F3F3F3;
+    background: #f3f1f1;
     padding: 27px;
     text-align: left;
     border: none;
@@ -56,18 +56,18 @@ button {
     color: #fff;
 }
 /*  Medium devices (desktop, 1440px and 2056px) */
-@media(min-width: 1442.98px) and (max-width: 2565px) {
+@media(min-width: 1442.98px) and(max-width: 2565px) {
     .create-todo {
-        margin: 6em 6em 2em 6em;
+        margin: 6em 1em 6em 2em;
         padding: 16px 34px 21px 30px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 64vh;
-        }
+        height: 74vh;
+    }
 }
 
 /*  Medium devices (laptop, 1024px and up to 1440px) */
-@media(min-width: 1022px) and (max-width: 1442.98px) {
+@media(min-width: 1022px) and(max-width: 1442.98px) {
     .create-todo {
         margin: 4em 1em 2em 2em;
         padding: 5px 16px 6px 15px;
@@ -78,10 +78,10 @@ button {
 }
 
 /*  Medium devices (tablets, 768px and 1024px) */
-@media(min-width: 768px) and (max-width: 1022px) {
+@media(min-width: 768px) and(max-width: 1022px) {
     .create-todo {
-        margin: 4em 0em 0em 1em;
-        padding: 0 5px 20px;
+        margin: 4em 0 0 1em;
+        padding: 0 5px 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
         height: 74vh;
@@ -89,15 +89,15 @@ button {
 }
 
 /* Small devices (landscape phones, 576px and up to 767.98 width) */
-@media(min-width: 576px) and (max-width: 767.98px) {
+@media(min-width: 576px) and(max-width: 767.98px) {
     .create-todo {
-        margin: 0.2em 4em 1em 4em;
+        margin: 0.2em 4em 1em;
         padding: 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
         height: 78vh;
     }
-   
+
 }
 
 /*  Small devices (landscape phones, 576px and below) */

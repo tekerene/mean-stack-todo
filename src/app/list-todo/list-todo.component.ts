@@ -25,7 +25,9 @@ export class ListTodoComponent implements OnInit {
             })
         }
     }
+
     // changing the state of the cards
+    
     onClick(e) {
         this.isActive = !this.isActive;
         e.preventDefault();

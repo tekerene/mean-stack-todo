@@ -18,35 +18,42 @@ import { title } from 'process';
   errorMgmt: (err: any, caught: Observable<any>) => ObservableInput<any>;
   
     constructor(private http: HttpClient) { }
-    createTodo(data: Todo): Observable<any> {
-      console.log(data)
-    //   const formData = new FormData();
-    //   formData.append('file', file);
-    //   formData.append('title', data.title);
-    //   formData.append('desc', data.desc);
-    //   formData.append('image', data.imageUrl)
-    //   formData.append('StartDate', data.date.startDate);
-    //   formData.append('endDate', data.date.endDate);
-    //   const header = new HttpHeaders();
-    //   const params = new HttpParams();
-    //   const options = {
-    //   params,
-    //   reportProgress: true,
-    //   headers: header
-    //  };    // const req = new HttpRequest('POST', url, formData, options);
 
-    let url = `${this.baseUri}/create`;
-      return this.http.post(url, data)
-      .pipe(
-        map(
-          res => {
-            return res;
-          }
-        ), catchError((error) => {
-          return throwError(error);
-        })
-      );
+
+    createTodo(imageUrl: string, profileImage: File): Observable<any> {
+      
+      const formData:any = new FormData();
+       formData.append("name", imageUrl);
+       formData.append("avatar", profileImage);
+      // formData.append('title', data.title);
+      // formData.append('desc', data.desc);
+      // formData.append('image', data.imageUrl)
+      // formData.append('StartDate', data.date.startDate);
+      // formData.append('endDate', data.date.endDate);
+      const header = new HttpHeaders();
+      const params = new HttpParams();
+     
+     // const req = new HttpRequest('POST', formData, options);
+      return this.http.post<Todo>(`${this.baseUri}/create`, formData,{
+      params,
+      reportProgress: true,
+      headers: header,
+      observe: 'events'
+      })
+
+    // let url = `${this.baseUri}/create`;
+    //   return this.http.post(url, data)
+    //   .pipe(
+    //     map(
+    //       res => {
+    //         return res;
+    //       }
+    //     ), catchError((error) => {
+    //       return throwError(error);
+    //     })
+    //   );
     }
+
     private handleError(error: HttpErrorResponse): any {
       if (error.error instanceof ErrorEvent) {
         console.error('An error occurred:', error.error.message);

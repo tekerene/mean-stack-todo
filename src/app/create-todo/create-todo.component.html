@@ -6,6 +6,17 @@
 
 <div class="create-todo">
     <form method="POST" [formGroup]='todoForm' (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <div class="progress form-group" *ngIf="percentDone">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+              [style.width.%]="todoService.percentDone">
+            </div>
+          </div>
+          <!-- Image Preview -->
+        <div class="form-group">
+            <div class="preview" *ngIf="preview && preview !== null">
+            <img [src]="preview" [alt]="todoForm.value">
+            </div>
+        </div>
         <div class="form-group">
             <label for="title"></label>
             <input type="text" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
@@ -13,14 +24,14 @@
         </div>
         <div class="form-group">
             <label for="desc"></label>
-            <textarea name="desc" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="7"
+            <textarea name="desc" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6"
                 placeholder="Description" required></textarea>
             <span class="max-desc">{{textVal}}/280max</span>
         </div>
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
-                <input type="file" name="imageUrl" formControlName="imageUrl" class="custom-file-input" id="imageUrl" required>
+                <input type="file" (change)="uploadFile($event)" name="imageUrl" formControlName="imageUrl" class="custom-file-input" id="imageUrl" required>
             
                 <label class="custom-file-label">Choose file...</label>
                 <div class="invalid-feedback" ></div>

@@ -31,9 +31,19 @@ app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-todo')));
 app.use('/api', todoRoute)
 
 
+
+/**
+   * @Make "public" Folder Publicly Available  
+*/ 
+
+app.use('/public', express.static('public'));
+
+// Error favicon.ico
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 /**
    * @Create port  
-   */
+*/
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
     console.log('Connected to port ' + port)

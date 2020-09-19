@@ -1,75 +1,10 @@
-// import { Component, OnInit, NgZone } from '@angular/core';
-// import { Moment } from 'moment';
-// import { TodoService } from '../services/todo.service';
-// import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-create-todo',
-//   templateUrl: './create-todo.component.html',
-//   styleUrls: ['./create-todo.component.css']
-// })
-// export class CreateTodoComponent implements OnInit {
-//   // currentTime: string = moment().format('M-D-YYYY');
-//   selected: {startDate: Moment, endDate: Moment};
-//   submited = false;
-//   todoForm: FormGroup;
-
-  
-//   submitted = false;
-//   constructor(
-//     public fb: FormBuilder,
-//     private router: Router,
-//     private ngZone: NgZone,
-//     private todoService: TodoService
-//     ) { 
-//        //this.mainForm();
-//     }
-
-//   ngOnInit(): void {
-//   }
-//   mainForm = this.fb.group({
-//     title: ['', [Validators.required, Validators.maxLength(100)]],
-//     desc: ['', [Validators.required, Validators.maxLength(250)]],
-//     dateTime: ['', [Validators.required]],
-//     imageUrl: ['', [Validators.required]],
-//   });
-  
-//   // Choose designation with select dropdown
-//   updateProfile(e){
-//     this.todoForm.get('designation').setValue(e, {
-//       onlySelf: true
-//     })
-//   }
-
-//    // Getter to access form control
-//    get myForm(){
-//     return this.todoForm.controls;
-//   }
-  
-//   onSubmit() {
-//     this.submitted = true;
-//     if (!this.todoForm.valid) {
-//       return false;
-//       console.log("an occured on submit")
-//     } else {
-//       this.todoService.createTodo(this.todoForm.value).subscribe(
-//         (res) => {
-//           console.log('Todo successfully created!')
-//           // this.ngZone.run(() => this.router.navigateByUrl('/home'))
-//         }, (error) => {
-//           console.log(error);
-//         });
-//     }
-//   }
-
-// }
 
 import { Component, OnInit } from '@angular/core';
 // import { FormGroup, FormControl  } from '@angular/forms';
 import { Moment } from 'moment';
 import { FormBuilder, Validators } from '@angular/forms'; 
 import { TodoService } from '../services/todo.service';  
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-todo',
@@ -82,9 +17,13 @@ export class CreateTodoComponent implements OnInit {
   textVal = 0;
   text = 0;
   inputMax = 0;
+  preview: string;
+  percentDone: any = 0;
  
   selected: {startDate: Moment, endDate: Moment};
+
   constructor(  private fb: FormBuilder, public todoService: TodoService) { }
+
   todoForm = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(100)]],
     desc: ['', [Validators.required, Validators.maxLength(250)]],
@@ -94,16 +33,48 @@ export class CreateTodoComponent implements OnInit {
   ngOnInit(): void {
    
   }
+
+   // Image Preview
+   uploadFile(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.todoForm.patchValue({
+      imageUrl: file
+    });
+    this.todoForm.get('imageUrl').updateValueAndValidity()
+
+    // File Preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.preview = reader.result as string;
+    }
+    reader.readAsDataURL(file)
+  }
+  
 onSubmit(){
   this.submitted = true;
   if(!this.todoForm.valid) {
     return false;
     console.log("An Error Occured submitting the form")
   } else {
-  
-  this.todoService.createTodo(this.todoForm.value).subscribe((val) => {
-    console.log(val + "Todo submitted successfully");
-    console.log(this.todoForm.value);
+  this.todoService.createTodo(
+      this.todoForm.value,
+      this.todoForm.value.imageUrl
+    ).subscribe((event: HttpEvent<any>) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.percentDone = Math.round(event.loaded / event.total * 100);
+          console.log(`Uploaded! ${this.percentDone}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('User successfully created!', event.body);
+          this.percentDone = false;
+      }
     window.location.reload();
   });
 }
