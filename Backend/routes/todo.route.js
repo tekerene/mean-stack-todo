@@ -26,7 +26,6 @@ todoRoute.route('/create').post((req, res, next) => {
             imageUrl: req.body.imageUrl, 
             title: req.body.title, 
             description: req.body.desc,
-            published: req.body.published,
             date: req.body.date
         })
         // Save save to database
