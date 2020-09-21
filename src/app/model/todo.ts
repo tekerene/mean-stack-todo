@@ -3,7 +3,7 @@ export class Todo {
     desc: string;
     imageUrl: string;
     date: {
-        startDate:String;
-        endDate:String;
-    };
+        startDate:string;
+        endDate: string
+    }
 }

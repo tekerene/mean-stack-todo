@@ -3,18 +3,20 @@
 /**
  * @todo controller to create, findAll, fineOne, update, delete, deleteAll,
  */
- 
+ const uploadImage = require('../util/imgUpload')
 const Todo = require("../models/TodoSchema");
 
 exports.create = (req, res)=>{
 
   // validation request
 
-  if (!req.body.title){
+  if (!req.body.title || !req.body.imageUrl || !req.body.desc){
     return res.status(400).send({
       message: "Required field Cant be empty ttt",
     })
-  }
+    
+   } 
+
   console.log(req.body)
 
   // * Create a Task
@@ -22,8 +24,9 @@ exports.create = (req, res)=>{
     title: req.body.title,
     desc: req.body.desc,
     imageUrl: req.body.imageUrl,
-    date: req.body.date
+    date: req.body.date,
   })
+
   // Save to database
 task.save((err)=>{
   if(err){
@@ -31,7 +34,11 @@ task.save((err)=>{
     console.log(err)
   }
   else{
+<<<<<<< HEAD
     message: "Todo registered successfully!",
+=======
+    //uploadImage({name: fields.imageUrl, path: fields.req.file.filename ,type: fields.imageUrl})
+>>>>>>> 3172b3792f2016015a76c08f2ad05c2a9d3fc919
     res.send(req.body)
   }
 })

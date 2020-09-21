@@ -54,6 +54,9 @@
     font-size: 3em;
     color: #05ab9f;
 }
+.fa-check-circle:active {
+    color: #05ab9f !important;
+}
 .card-title {
     color: #f79623;
     font-size: 2em;

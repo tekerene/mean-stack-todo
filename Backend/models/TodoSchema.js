@@ -12,7 +12,7 @@ let TodoSchema = new Schema({
     type: String
   },
   date: {
-    startDate: String,
+    startDate: String ,
     endDate: String
   },
   published: {

@@ -5,31 +5,31 @@
  -->
 
 <div class="create-todo">
-    <form method="POST" [formGroup]='todoForm' (ngSubmit)="onSubmit()">
+    <form method="POST" [formGroup]='todoForm' (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title"></label>
-            <input type="text" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <input type="text" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <span class="max-desc">{{inputVal}}/100max</span>
         </div>
         <div class="form-group">
             <label for="desc"></label>
-            <textarea name="desc" id="desc" formControlName="desc" class="form-control" cols="" rows="7"
+            <textarea name="desc" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="7"
                 placeholder="Description" required></textarea>
-            <span class="max-desc">280 max</span>
+            <span class="max-desc">{{textVal}}/280max</span>
         </div>
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
                 <input type="file" name="imageUrl" formControlName="imageUrl" class="custom-file-input" id="imageUrl" required>
             
-                <label class="custom-file-label" for="dateTime">Choose file...</label>
+                <label class="custom-file-label">Choose file...</label>
                 <div class="invalid-feedback" ></div>
             </div>
             <div class="form-group d-flex">
-                <input class="dateTime" type="text" formControlName="date" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"
+                 <input class="dateTime" type="text" formControlName="date" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"
                     placeholder="20-05-2020" />
                 <button type="submit" class="btn-lg">Add</button>
             </div>
-
         </div>
     </form>
 </div>
