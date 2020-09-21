@@ -16,19 +16,20 @@ todoRoute.route('/').get((req, res) => {
 })
 
 todoRoute.route('/create').post((req, res, next) => {
-    TodoModel.create(req.body, (error, data) => { // validation request
-         console.log(req.body)
+    TodoModel.create(req.body, (error, data) => { 
+
+        // validation request
         if (!req.body.title || !req.body.desc || !req.body.imageUrl || !req.body.date) {
             return res.status(400).send({message: "Required field Cant be empty"})
         }
+        console.log(req.body)
         // * Create a Task
         const task = new TodoModel({
-            imageUrl: req.body.imageUrl, 
-            title: req.body.title, 
-            description: req.body.desc,
-            published: req.body.published,
+            title: req.body.title,
+            desc: req.body.desc,
+            imageUrl: req.body.imageUrl,
             date: req.body.date
-        })
+          })
         // Save save to database
         task.save((err) => {
             if (err) {
@@ -40,42 +41,6 @@ todoRoute.route('/create').post((req, res, next) => {
         })
     })
 })
-
-// task.save().then((data)=>{
-//   res.send(data);
-// }).catch((er)=>{
-//   res.status(500).send({
-//     message:  "Some Errors While Creating This Task"
-//   })
-// })
-
-    // if (!req.body.title) {
-    //   res.status(400).send({ message: "Content can not be empty!" });
-    //   return;
-    // }
-  
-    // Create a Todo
-    // const todo = new Todo({
-    //   title: req.body.title,
-    //   description: req.body.desc,
-    //   imageUrl: req.body.image,
-    //   published: req.body.published ? req.body.published : false
-    // });
-  
-    // Save Todo in the database
-    // todo
-    //   .save(todo)
-    //   .then(data => {
-    //     res.send(data);
-    //   })
-    //   .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while creating the Todo."
-    //     });
-    //   });
-    // })
-
 
 
 todoRoute.route('/edit/:id').get((req, res) => {

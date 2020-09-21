@@ -4,21 +4,15 @@
 
   <div *ngIf="todoData.length > 0">
 
-    <div *ngFor="let todo of todoData; let i = index" class="card  taskFail">
-      <div class="card-header">
-        <img src="http://localhost:4000/{{todo.imageUrl}}" alt="">
-      </div>
-      <div class="card-body def-body">
-        <h5 class="card-title mb-3">{{ todo.title }}</h5>
-        <p class="card-text">{{ todo.desc }}</p>
-        <h4 class="mt-2"> {{todo.date.startDate}}</h4>
-        <h4 class="mt-2">{{todo.date.endDate}}</h4>
-      </div>
-      <div class="custom-control" (click)="onClick()">
-      
-        <i class="fa fa-check-circle" [ngClass]="{'active': isActive}"></i>
-      </div>
-    <!-- <button type="reset" (click)="removeTodo()" class="bg-warning">delete</button> -->
+  <div *ngFor="let todo of todoData; let i = index" class="card  taskFail">
+    <div class="card-header">
+      {{todo.imageUrl}}
+    </div>
+    <div class="card-body def-body">
+      <h5 class="card-title mb-3">{{ todo.title }}</h5>
+      <p class="card-text">{{ todo.desc }}</p>
+      <h4 class="mt-4">{{todo.date.startDate}}</h4>
+      <h4 class="mt-4">{{todo.date.endDate}}</h4>
     </div>
   </div>
 </div>

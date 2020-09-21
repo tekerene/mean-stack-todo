@@ -36,7 +36,8 @@ task.save((err, result)=>{
     console.log(err)
   }
   else{
-    res.send(res.body)
+    message: "Todo registered successfully!",
+    res.send(req.body)
   }
 })
 }
