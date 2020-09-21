@@ -12,15 +12,16 @@ let TodoSchema = new Schema({
     type: String
   },
   date: {
-    type: String
+    startDate: String,
+    endDate: String
   },
   published: {
     type: Boolean
   },
-}, 
-{timestamps: true},
-{
-  collection: 'todos'
-})
+},
+  { timestamps: true },
+  {
+    collection: 'todos'
+  })
 
 module.exports = mongoose.model('todo', TodoSchema)

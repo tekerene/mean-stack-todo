@@ -2,5 +2,8 @@ export class Todo {
     title: string;
     desc: string;
     imageUrl: string;
-    date: String;
+    date: {
+        startDate:String;
+        endDate:String;
+    };
 }

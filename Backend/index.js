@@ -7,7 +7,7 @@ let express = require('express'),
 
 
 const app = express();
-const todoRoute = require('./routes/todo')
+const todoRoute = require('./routes/todo.route')
 // Connecting with mongo db
 
 mongoose.Promise = global.Promise;
