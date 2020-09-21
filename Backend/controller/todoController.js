@@ -9,51 +9,17 @@ const Todo = require("../models/TodoSchema");
  const mongoose = require('mongoose');
 
 
-
-// Multer File upload settings
-const DIR = './public/';
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    const fileName = file.originalname.toLowerCase().split(' ').join('-');
-    cb(null, fileName)
-  }
-});
-
-
-// Multer Mime Type Validation
-var upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 10
-  },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-    }
-  }
-});
-
-
-exports.create = (req, res, next)=>{
+exports.create  = (req, res, next)=>{
+ //console.log(req.body.filename)
 
   // validation request
-
-  if (!req.body.title || !req.body.imageUrl || !req.body.desc){
+  if (!req.body.title || !req.body.desc || !req.body.imageUrl || !req.body.date){
     return res.status(400).send({
       message: "Required field Cant be empty ttt",
     })
     
    } 
-
   console.log(req.body)
-  const url = req.protocol + '://' + req.get('host')
 
   // * Create a Task
   const task = new Todo({
@@ -61,8 +27,6 @@ exports.create = (req, res, next)=>{
     desc: req.body.desc,
     imageUrl: req.body.imageUrl,
     date: req.body.date,
-    _id: new mongoose.Types.ObjectId(),
-    avatar: url + '/public/' + req.file.filename
   })
 
   // Save to database
@@ -72,18 +36,8 @@ task.save((err, result)=>{
     console.log(err)
   }
   else{
-    res.status(201).json({
-      message: "Todo registered successfully!",
-      userCreated: {
-        _id: result._id,
-        avatar: result.avatar
-        
-      }
-      
-    })
-    res.send(req.body)
+    res.send(res.body)
   }
-  console.log(userCreated.avatar)
 })
 }
   /**
@@ -120,8 +74,9 @@ task.save((err, result)=>{
         else res.send(data);
       })
       .catch(err => {
+        console.log(err);
         res
-          .status(500)
+          .status(400)
           .send({ message: "Error retrieving Todo with id=" + id });
       });
   };

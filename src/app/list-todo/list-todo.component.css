@@ -195,6 +195,10 @@
         font-size: 2em;
         color: #303148;
     }
+    .card-header img {
+        width: 100px;
+        height: 100px;
+    }
     .card-body {
         width: 65%;
         height: 291px;

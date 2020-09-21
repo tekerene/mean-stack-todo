@@ -16,11 +16,16 @@ export class ListTodoComponent implements OnInit {
     readTodo(): void {
         this.todoService.getTodos().subscribe((data) => {
             this.todoData = data;
+            console.log(data)
+            this.todoData.forEach(todo => {
+                 console.log(`********************************* ${todo.imageUrl}`);
+            });
+           
         });
     }
     removeTodo(todo, index) {
         if (window.confirm('Are you sure?')) {
-            this.todoService.deleteTodo(todo._id).subscribe((data) => {
+            this.todoService.deleteTodo(todo.id).subscribe((data) => {
                 this.todoData.splice(index, 1);
             })
         }

@@ -36,7 +36,7 @@ app.use('/api', todoRoute)
    * @Make "public" Folder Publicly Available  
 */ 
 
-app.use('/public', express.static('public'));
+app.use('/public/images', express.static('public'));
 
 // Error favicon.ico
 app.get('/favicon.ico', (req, res) => res.status(204));

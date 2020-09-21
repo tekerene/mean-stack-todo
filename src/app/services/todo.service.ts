@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams, HttpRequest } from '@angular/common/http';
-import { empty, Observable, ObservableInput, throwError } from 'rxjs';
+import { Observable, ObservableInput, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Todo } from '../model/todo';
 import { title } from 'process';
@@ -14,44 +14,56 @@ import { title } from 'process';
 
      baseUri:string = 'http://localhost:4000/api';
      basecreate:string = 'http://localhost:4000/api/create';
+     baseImage:string = 'http://localhost:4000/api/images';
      headers = new HttpHeaders().set('Content-Type', 'application/json');
   errorMgmt: (err: any, caught: Observable<any>) => ObservableInput<any>;
   
     constructor(private http: HttpClient) { }
 
 
-    createTodo(imageUrl: string, profileImage: File): Observable<any> {
+    // imageUpload(data:Todo, file:File): Observable<any> {
       
-      const formData:any = new FormData();
-       formData.append("name", imageUrl);
-       formData.append("avatar", profileImage);
-      // formData.append('title', data.title);
-      // formData.append('desc', data.desc);
-      // formData.append('image', data.imageUrl)
-      // formData.append('StartDate', data.date.startDate);
-      // formData.append('endDate', data.date.endDate);
-      const header = new HttpHeaders();
-      const params = new HttpParams();
+    //   const formData:any = new FormData();
+    //   formData.append('file', file);
+    //   formData.append("avatar", data.imageUrl);
      
-     // const req = new HttpRequest('POST', formData, options);
-      return this.http.post<Todo>(`${this.baseUri}/create`, formData,{
-      params,
-      reportProgress: true,
-      headers: header,
-      observe: 'events'
-      })
+    //   const header = new HttpHeaders();
+    //   const params = new HttpParams();
+    //   const options = {
+    //     params,
+    //     reportProgress: true,
+    //     headers: header
+    //   };
+    //   const req = new HttpRequest('POST', this.baseImage, formData, options);
+    //   return this.http.request(req);
+    // }
+    uploadImage(image){
+      return this.http.post(`${this.baseUri }/images`, image);
+    }
+    
+    getTodoById(id: string): Observable<any> {
+      const url = `${this.baseUri}/${id}`;
+      return this.http.get<Todo>(url).pipe(
+        catchError(this.handleError)
+      );
+    }
 
-    // let url = `${this.baseUri}/create`;
-    //   return this.http.post(url, data)
-    //   .pipe(
-    //     map(
-    //       res => {
-    //         return res;
-    //       }
-    //     ), catchError((error) => {
-    //       return throwError(error);
-    //     })
-    //   );
+
+
+    
+    createTodo(data: Todo): Observable<any> {
+      console.log(data)
+      let url = `${this.baseUri}/create`;
+      return this.http.post(url, data)
+      .pipe(
+        map(
+          res => {
+            return res;
+          }
+        ), catchError((error) => {
+          return throwError(error);
+        })
+      );
     }
 
     private handleError(error: HttpErrorResponse): any {
@@ -65,12 +77,15 @@ import { title } from 'process';
       return throwError(
         'Something bad happened; please try again later.');
     }
+
+    
+  // Get all Todos
    getTodos() {
     return this.http.get(`${this.baseUri}`);
     
   }
 
-  // Get employee
+  // Get todos
   getTodo(id): Observable<any> {
     let url = `${this.baseUri}/read/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
@@ -81,7 +96,7 @@ import { title } from 'process';
     )
   }
   
-     // Update employee
+     // Update todos
   updateTodo(id, data): Observable<any> {
     let url = `${this.baseUri}/update/${id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(
@@ -89,7 +104,7 @@ import { title } from 'process';
     )
   }
   
-    // Delete employee
+    // Delete todos
   deleteTodo(id): Observable<any> {
     let url = `${this.baseUri}/delete/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(
@@ -97,19 +112,4 @@ import { title } from 'process';
     )
   }
   
-     // Error handling 
-//   errorMgmt(error: HttpErrorResponse) {
-//     let errorMessage = '';
-//     if (error.error instanceof ErrorEvent) {
-//       // Get client-side error
-//       errorMessage = error.error.message;
-//     } else {
-//       // Get server-side error
-//       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-//     }
-//     console.log(errorMessage);
-//     return throwError(errorMessage);
-//   }
-
-// }
 }

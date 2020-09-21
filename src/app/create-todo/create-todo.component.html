@@ -19,19 +19,19 @@
         </div>
         <div class="form-group">
             <label for="title"></label>
-            <input type="text" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <input type="text" maxlength="100"(keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
             <span class="max-desc">{{inputVal}}/100max</span>
         </div>
         <div class="form-group">
             <label for="desc"></label>
-            <textarea name="desc" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6"
+            <textarea name="desc" maxlength="280" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6"
                 placeholder="Description" required></textarea>
             <span class="max-desc">{{textVal}}/280max</span>
         </div>
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
-                <input type="file" (change)="uploadFile($event)" name="imageUrl" formControlName="imageUrl" class="custom-file-input" id="imageUrl" required>
+                <input type="file"  name="imageUrl" formControlName="imageUrl" (change)=" imageUpload(event)" class="custom-file-input" id="imageUrl" required>
             
                 <label class="custom-file-label">Choose file...</label>
                 <div class="invalid-feedback" ></div>
