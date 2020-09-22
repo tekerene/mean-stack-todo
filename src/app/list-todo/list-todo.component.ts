@@ -6,7 +6,7 @@ import {TodoService} from '../services/todo.service'
 export class ListTodoComponent implements OnInit {
 
     todoData : any = [];
-    isActive = true;
+    isActive = false;
     constructor(private todoService : TodoService) {
         this.readTodo();
     }
@@ -17,10 +17,9 @@ export class ListTodoComponent implements OnInit {
         this.todoService.getTodos().subscribe((data) => {
             this.todoData = data;
             console.log(data)
-            this.todoData.forEach(todo => {
-                 console.log(`********************************* ${todo.imageUrl}`);
-            });
-           
+            // this.todoData.forEach(todo => {
+            //      console.log(`********************************* ${todo.imageUrl}`);
+            // });
         });
     }
     removeTodo(todo, index) {
@@ -34,8 +33,14 @@ export class ListTodoComponent implements OnInit {
     // changing the state of the cards
     
     onClick(e) {
-        this.isActive = !this.isActive;
-        e.preventDefault();
+        if (this.isActive == true){
+            this.isActive = !this.isActive;
+        }
+        else {
+            this.isActive == false;
+        }
+        
+        // e.preventDefault();
         
         console.log("********************8change state ******************************")
         

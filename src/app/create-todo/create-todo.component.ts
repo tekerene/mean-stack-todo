@@ -15,36 +15,21 @@ export class CreateTodoComponent implements OnInit {
     inputMax = 0;
     preview : string;
     percentDone : any = 0;
-    imagePath = '';
+    imagePath : any;
 
     selected : {
         startDate: Moment,
         endDate: Moment
     };
+  
 
     constructor(private fb : FormBuilder, public todoService : TodoService) {}
 
     todoForm = this.fb.group({
-        title: [
-            '',
-            [
-                Validators.required, Validators.maxLength(100)
-            ]
-        ],
-        desc: [
-            '',
-            [
-                Validators.required, Validators.maxLength(250)
-            ]
-        ],
-        imageUrl: [
-            '',
-            [Validators.required]
-        ],
-        date: [
-            '',
-            [Validators.required]
-        ]
+        title: ['',[Validators.required, Validators.maxLength(100)  ]],
+        desc: ['',[ Validators.required, Validators.maxLength(250) ] ],
+        imageUrl: ['',[Validators.required] ],
+        date: ['',[Validators.required] ]
     });
     ngOnInit(): void {}
 
@@ -55,7 +40,7 @@ export class CreateTodoComponent implements OnInit {
     }) {
         const fd = new FormData();
         console.log(e.target.files);
-        fd.append('imageUrl', e.target.files[0]);
+        fd.append('image', e.target.files[0]);
         this.todoService.uploadImage(fd).subscribe((path : any) => {
             this.imagePath = path.imgPath;
         });
@@ -64,15 +49,14 @@ export class CreateTodoComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        if (!this.todoForm.valid) {
-            return false;
-            console.log("An Error Occured submitting the form")
-        } else {
-            this.todoForm.value.imageUrl;
-            this.todoService.createTodo(this.todoForm.value,).subscribe((event : HttpEvent < any >) => {
-                window.location.reload();
-            });
-        }
+        console.log(this.todoForm.value);
+        this.todoForm.value.imageUrl = this.imagePath;
+        console.log(this.todoForm.value);
+        this.todoService.addTodo(this.todoForm.value).subscribe((val) => {
+        
+        });
+      
+        window.location.reload();
     }
     wordCount(e) {
         this.inputVal = this.inputMax + e.target.value.length;

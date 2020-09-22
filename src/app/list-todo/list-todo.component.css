@@ -1,5 +1,5 @@
 .list-todo {
-    margin-top: 4em;
+    margin-top: 6em;
     overflow-y: scroll;
     width: 100%; 
     height: 700px;
@@ -53,15 +53,31 @@
 .custom-control i {
     font-size: 3em;
     color: #05ab9f;
+
 }
 .fa-check-circle:active {
     color: #05ab9f !important;
 }
 .card-title {
     color: #f79623;
-    font-size: 1.5em;
+    font-size: 2em;
 }
-
+.custom-control .fa-trash {
+    color: red;
+    position: absolute;
+    top: 264%;
+    right: -10%;
+    cursor: pointer;
+    font-size: 2em;
+}
+.custom-control .fa-edit {
+    position: absolute;
+    bottom: 810%;
+    right: -22%;
+    color: #05ab9f;
+    cursor: pointer;
+    font-size: 2em;
+}
 /* default state in process  */
 
 .default .card-header {
@@ -80,6 +96,7 @@
 }
 .default .custom-control i {
     color: #707070;
+    cursor: pointer;
 }
 
 /* state task fail */
@@ -129,6 +146,11 @@
         font-size: 2em;
         color: #000;
     }
+    .card-header img {
+        width: 273px;
+        height: 291px;
+        object-fit: cover;
+    }
     .card-body {
         width: 65%;
         height: 291px;
@@ -169,7 +191,7 @@
 /*  Medium devices (laptop, 1024px and up to 1440px) */
 @media(min-width: 1022px) and (max-width: 1442.98px) {
     .list-todo {
-        margin: 4em 1em 5em 0.5em;
+        margin: 6em 1em 5em 0.5em;
     }
     .card {
         width: 100%;
@@ -196,8 +218,9 @@
         color: #303148;
     }
     .card-header img {
-        width: 100px;
-        height: 100px;
+        width: 283px;
+        height: 291px;
+        object-fit: cover;
     }
     .card-body {
         width: 65%;
@@ -230,11 +253,12 @@
     .default .custom-control i {
         color: #303148;
     }
+
 }
 /*  Medium devices (tablets, 768px and 1024px) */
 @media(min-width: 768px) and (max-width: 1022px) {
     .list-todo {
-        margin: 4em 0 0
+        margin: 6em 0 0
     }
     .card {
         width: 100%;
@@ -258,6 +282,11 @@
         opacity: 1;
         font-size: 2em;
         color: #707070;
+    }
+    .card-header img {
+        height: 259px;
+        width: 178px;
+        object-fit: cover;
     }
     .card-body {
         width: 65%;
@@ -284,7 +313,7 @@
 /* Small devices (landscape phones, 576px and up to 767.98 width) */
 @media(min-width: 576px) and (max-width: 767.98px) {
     .list-todo {
-        margin-top: 4em;
+        margin-top: 6em;
     }
     .card {
         width: 100%;
@@ -308,6 +337,11 @@
         opacity: 1;
         font-size: 2em;
         color: #707070;
+    }
+    .card-header img {
+        height: 169px;
+        width: 170px;
+        object-fit: cover;
     }
     .card-body {
         width: 65%;

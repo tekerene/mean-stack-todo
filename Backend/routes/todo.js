@@ -9,7 +9,6 @@
     var router = require("express").Router();
 
     router.get('/images/:name', (req,res)=>{
-      console.log('***********************');
       //res.send('sfchejf')
       let directory = path.join(__dirname+ '../../');
       console.log(directory)
@@ -51,7 +50,7 @@
 
     const storage = multer.diskStorage({
       destination: (req, file, cb) => {
-          cb(null, `public/images`);
+          cb(null, `upload`);
       },
       filename: (req, file, cb) => {
           cb(null, Date.now() + path.extname(file.originalname));
@@ -65,10 +64,11 @@
       }
   }
   const upload = multer({ storage: storage, fileFilter: fileFilter });
+
   router.post('/images', upload.single('image'), (req, res) => {
        
-       let  imgPath = `public/images/${req.file.filename}`;
-         console.log(req.file.filename);
+       let  imgPath = `/upload/${req.file.filename}`;
+         
       try {
           return res.status(201).json({
               message: 'File uploded successfully',
@@ -77,6 +77,7 @@
       } catch (error) {
           console.error(error);
       }
+      console.log(":here image path" +imgPath);
   });
 
   module.exports = router;

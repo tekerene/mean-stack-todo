@@ -1,5 +1,5 @@
 module.exports = {
-    getTodos:"/",
+    getTodos:"/view",
     getById:"/:id",
     publishedTodo:"/published",
     createTodo:"/create",

@@ -72,7 +72,7 @@ task.save((err, result)=>{
       .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found Todo with id " + id });
-        else res.send(data);
+        else res.send(data + "success");
       })
       .catch(err => {
         console.log(err);
@@ -131,7 +131,7 @@ task.save((err, result)=>{
         }
       })
       .catch(err => {
-        res.status(500).send({
+        res.status(400).send({
           message: "Could not delete Todo with id=" + id
         });
       });

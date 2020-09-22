@@ -6,15 +6,20 @@
 
   <div *ngFor="let todo of todoData; let i = index" class="card  taskFail">
     <div class="card-header">
-      {{todo.imageUrl}}
+      <img src="http://localhost:3009{{todo?.imageUrl}}" alt="">
     </div>
     <div class="card-body def-body">
-      <h5 class="card-title mb-3">{{ todo.title }}</h5>
-      <p class="card-text">{{ todo.desc }}</p>
-      <h4 class="mt-4">{{todo.date.startDate}}</h4>
-      <h4 class="mt-4">{{todo.date.endDate}}</h4>
-    </div>
+      <h5 class="card-title mb-3">{{todo?.title }}</h5>
+      <p class="card-text">{{todo?.desc }}</p>
+      <h4 class="mt-4">{{todo?.date}}</h4>
+    </div> 
+    <div class="custom-control">
+    <i class="fa fa-check-circle"></i>
+    <i (click)="removeTodo()" class="fa fa-trash"></i>  
+    <i class="fa fa-edit"></i>
   </div>
+  </div>
+ 
 </div>
 
 <!-- <div class="card complete">

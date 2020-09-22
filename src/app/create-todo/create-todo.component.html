@@ -31,13 +31,20 @@
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
-                <input type="file"  name="imageUrl" formControlName="imageUrl" (change)=" imageUpload(event)" class="custom-file-input" id="imageUrl" required>
+                <input type="file"  name="imageUrl" formControlName="imageUrl" (change)="imageUpload($event)" class="custom-file-input" id="imageUrl" required>
             
                 <label class="custom-file-label">Choose file...</label>
                 <div class="invalid-feedback" ></div>
             </div>
             <div class="form-group d-flex">
-                 <input class="dateTime" type="text" formControlName="date" ngxDaterangepickerMd [(ngModel)]="selected" class="form-control"
+                 <input class="dateTime" type="text" formControlName="date" ngxDaterangepickerMd
+                 [timePicker]="true"
+                 [timePickerSeconds]="true"
+                 [singleDatePicker]= "true"
+                 [timePickerIncrement]="15"
+                 [timePicker24Hour]="true"
+                 [locale]="{format: 'DD/MM/YYYY HH:mm:ss', firstDay: 1}"
+                 [(ngModel)]="selected" class="form-control"
                     placeholder="20-05-2020" />
                 <button type="submit" class="btn-lg">Add</button>
             </div>
