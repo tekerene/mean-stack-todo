@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-// import { FormGroup, FormControl  } from '@angular/forms';
 import {Moment} from 'moment';
 import {FormBuilder, Validators} from '@angular/forms';
 import {TodoService} from '../services/todo.service';
-import {HttpEvent, HttpEventType} from '@angular/common/http';
 
 @Component({selector: 'app-create-todo', templateUrl: './create-todo.component.html', styleUrls: ['./create-todo.component.css']})
 export class CreateTodoComponent implements OnInit {
@@ -13,14 +11,13 @@ export class CreateTodoComponent implements OnInit {
     textVal = 0;
     text = 0;
     inputMax = 0;
-    preview : string;
-    percentDone : any = 0;
     imagePath : any;
 
     selected : {
         startDate: Moment,
         endDate: Moment
     };
+   
   
 
     constructor(private fb : FormBuilder, public todoService : TodoService) {}
@@ -46,15 +43,12 @@ export class CreateTodoComponent implements OnInit {
         });
     }
 
-
     onSubmit() {
         this.submitted = true;
         console.log(this.todoForm.value);
         this.todoForm.value.imageUrl = this.imagePath;
         console.log(this.todoForm.value);
-        this.todoService.addTodo(this.todoForm.value).subscribe((val) => {
-        
-        });
+        this.todoService.addTodo(this.todoForm.value).subscribe((val) => { });
       
         window.location.reload();
     }

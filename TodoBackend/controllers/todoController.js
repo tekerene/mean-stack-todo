@@ -7,7 +7,7 @@ exports.addTodos = (req, res) => {
     const todo = new Todo({
         title: req.body.title,
         desc: req.body.desc,
-        date: req.body.date.startDate,
+        date: req.body.date,
         imageUrl: req.body.imageUrl,
         // time: req.body.time,
         status: req.body.status,

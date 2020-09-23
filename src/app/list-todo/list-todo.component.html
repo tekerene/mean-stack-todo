@@ -1,42 +1,28 @@
 <div class="list-todo">
-  <!-- <tr *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></tr>
-   -->
+    <tr *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></tr>
 
-  <div *ngIf="todoData.length > 0">
 
-  <div *ngFor="let todo of todoData; let i = index" class="card  taskFail">
-    <div class="card-header">
-      <img src="http://localhost:3009{{todo?.imageUrl}}" alt="">
+    <div *ngIf="todoData.length > 0" >
+
+        <div *ngFor="let todo of todoData; let i = index" class="card taskFail">
+            <div class="card-header">
+                <img src="http://localhost:3009{{todo?.imageUrl}}" alt="">
+            </div>
+            <div class="card-body def-body">
+                <h5 class="card-title mb-3">{{todo?.title }}</h5>
+                <p class="card-text">{{todo?.desc }}</p>
+                <h4 class="mt-4">{{todo.date.startDate }}</h4>
+                <h4 class="mt-4">{{todo.date.endDate }}</h4>
+            </div>
+            <div class="custom-control">
+                <i class="status fa fa-check-circle"></i>
+                <i (click)="removeTodo(todo, i)" class="fa fa-trash"></i>
+                <!-- <i class="update fa fa-edit"></i> -->
+            </div>
+        </div>
+
     </div>
-    <div class="card-body def-body">
-      <h5 class="card-title mb-3">{{todo?.title }}</h5>
-      <p class="card-text">{{todo?.desc }}</p>
-      <h4 class="mt-4">{{todo?.date}}</h4>
-    </div> 
-    <div class="custom-control">
-    <i class="fa fa-check-circle"></i>
-    <i (click)="removeTodo()" class="fa fa-trash"></i>  
-    <i class="fa fa-edit"></i>
   </div>
-  </div>
- 
-</div>
-
-<!-- <div class="card complete">
-    <div class="card-header">
-      276x291
-    </div>
-    <div class="card-body">
-      <h5 class="card-title mb-3">Title</h5>
-      <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda soluta illum quos porro
-        recusandae!  commodi facilis dicta voluptas.</p>
-      <h4 class="mt-4">22-05-2020, 12:00</h4>
-    </div>
-    <div class="custom-control ">
-      <i class="fa fa-check-circle"></i>
-    </div>
-  </div> -->
-
 <!-- on state tasks in process  -->
 
 <!-- <div class="card default">
@@ -54,7 +40,7 @@
   </div>
 </div> -->
 
-<!-- on state not completed -->
+<!-- on state not completed* -->
 <!-- 
 <div class="card taskFail">
   <div class="card-header">

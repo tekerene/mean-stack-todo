@@ -6,48 +6,41 @@
 
 <div class="create-todo">
     <form method="POST" [formGroup]='todoForm' (ngSubmit)="onSubmit()" enctype="multipart/form-data">
-        <div class="progress form-group" *ngIf="percentDone">
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-              [style.width.%]="todoService.percentDone">
-            </div>
-          </div>
-          <!-- Image Preview -->
-        <div class="form-group">
-            <div class="preview" *ngIf="preview && preview !== null">
-            <img [src]="preview" [alt]="todoForm.value">
-            </div>
-        </div>
         <div class="form-group">
             <label for="title"></label>
-            <input type="text" maxlength="100"(keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <input type="text" maxlength="100" (keyup)="wordCount($event)" name="title" formcontrolname="title" class="form-control" id="title" placeholder="Title" required>
             <span class="max-desc">{{inputVal}}/100max</span>
         </div>
         <div class="form-group">
             <label for="desc"></label>
-            <textarea name="desc" maxlength="280" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6"
-                placeholder="Description" required></textarea>
+            <textarea name="desc" maxlength="280" (keyup)="textCount($event)" id="desc" formcontrolname="desc" class="form-control" cols="" rows="6" placeholder="Description" required></textarea>
             <span class="max-desc">{{textVal}}/280max</span>
         </div>
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
-                <input type="file"  name="imageUrl" formControlName="imageUrl" (change)="imageUpload($event)" class="custom-file-input" id="imageUrl" required>
-            
+                <input type="file" name="imageUrl" formcontrolname="imageUrl" (change)="imageUpload($event)" class="custom-file-input" id="imageUrl" required>
                 <label class="custom-file-label">Choose file...</label>
-                <div class="invalid-feedback" ></div>
+                <div class="invalid-feedback"></div>
             </div>
-            <div class="form-group d-flex">
-                 <input class="dateTime" type="text" formControlName="date" ngxDaterangepickerMd
-                 [timePicker]="true"
-                 [timePickerSeconds]="true"
-                 [singleDatePicker]= "true"
-                 [timePickerIncrement]="15"
-                 [timePicker24Hour]="true"
-                 [locale]="{format: 'DD/MM/YYYY HH:mm:ss', firstDay: 1}"
-                 [(ngModel)]="selected" class="form-control"
-                    placeholder="20-05-2020" />
+
+            <div class="d-flex">
+                <div class="form-group dateTime">
+                    <input placeholder="yyyy/mm/dd hh:mm:ss" type="datetime-local" 
+                    ngxdaterangepickermd [timePicker]="true" 
+                    [timePickerSeconds]="true" [singleDatePicker]="true" 
+                    [timePickerIncrement]="15" [timePicker24Hour]="true"
+                     [locale]="{format: 'YYYY/MM/DD HH:mm:ss', firstDay: 1}" 
+                     [(ngModel)]="selected" class="form-control"
+                    formcontrolname="date" id="date" required>
+
+                </div>
                 <button type="submit" class="btn-lg">Add</button>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="author"></label>
+            <input type="text" name="author" placeholder="Author" class="form-control">
         </div>
     </form>
 </div>
