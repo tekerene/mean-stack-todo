@@ -1,35 +1,67 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Moment} from 'moment';
-import {FormBuilder, Validators} from '@angular/forms';
+import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TodoService} from '../services/todo.service';
+import { Todo } from '../model/todo'
 
-@Component({selector: 'app-create-todo', templateUrl: './create-todo.component.html', styleUrls: ['./create-todo.component.css']})
+@Component({
+    selector: 'app-create-todo',
+    templateUrl: './create-todo.component.html', 
+    styleUrls: ['./create-todo.component.css']
+})
+
 export class CreateTodoComponent implements OnInit {
-
+    @Input() todos:Todo;
     submitted = false;
     inputVal = 0;
     textVal = 0;
     text = 0;
     inputMax = 0;
-    imagePath : any;
+    public imagePath : any;
+
+    // datainput = {
+    //     title: "",
+    //     desc: "",
+    //     imageUrl: "",
+    //     date: {
+    //         startDate: "",
+    //         endDate: ""
+    //     },
+    //     author: ""
+    // };
+
+    //public todoForm: FormGroup;
 
     selected : {
         startDate: Moment,
         endDate: Moment
     };
+    todoForm: FormGroup;
+    picker: any;
    
-  
+    constructor(public fb : FormBuilder, public todoService : TodoService) {this.mainForm()}
 
-    constructor(private fb : FormBuilder, public todoService : TodoService) {}
-
-    todoForm = this.fb.group({
-        title: ['',[Validators.required, Validators.maxLength(100)  ]],
-        desc: ['',[ Validators.required, Validators.maxLength(250) ] ],
-        imageUrl: ['',[Validators.required] ],
-        date: ['',[Validators.required] ]
+   
+    ngOnInit(): void {  
+        
+}
+mainForm() {
+    this.todoForm = this.fb.group({
+        title: ['',[Validators.required, Validators.maxLength(100)]],
+        desc: ['',[ Validators.required, Validators.maxLength(250)]],
+        imageUrl: ['',[Validators.required]],
+        date: ['',[Validators.required]],
+        author: ['',[Validators.required]],
     });
-    ngOnInit(): void {}
+}
 
+
+    // SHOW DATE AND TIME LIMIT
+    public updateDateRange() {
+        this.picker.datePicker.startDate('23/09/2020');
+        this.picker.datePicker.endDate('2017-04-2021');
+    }
+    //function to upload image and save in the serve uploads folder
     imageUpload(e : {
         target: {
             files: (string | Blob)[];
@@ -43,15 +75,21 @@ export class CreateTodoComponent implements OnInit {
         });
     }
 
-    onSubmit() {
-        this.submitted = true;
-        console.log(this.todoForm.value);
-        this.todoForm.value.imageUrl = this.imagePath;
-        console.log(this.todoForm.value);
-        this.todoService.addTodo(this.todoForm.value).subscribe((val) => { });
-      
-        window.location.reload();
-    }
+    // function to submit a new task to the database
+
+    
+    
+        onSubmit() {
+            this.submitted = true;
+            //console.log(this.todoForm.value);
+            this.todoForm.value.imageUrl = this.imagePath;
+            //console.log(this.todoForm.value);
+            this.todoService.addTodo(this.todoForm.value).subscribe((val) => { 
+                console.log("Todo successfully submittef"+this.todoForm.value)
+            }); 
+             window.location.reload();
+        }
+    
     wordCount(e) {
         this.inputVal = this.inputMax + e.target.value.length;
 

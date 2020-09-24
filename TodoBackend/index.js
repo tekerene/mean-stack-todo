@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const todoRoute = require('./routes/todo')
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
 /**
  * @API cors  
  */

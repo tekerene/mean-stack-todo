@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../model/todo';
+import { Status } from '../model/status'
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { endpoints } from '../endpoint.config';
@@ -9,7 +10,7 @@ import { endpoints } from '../endpoint.config';
 })
 export class TodoService {
   baseUrl = 'http://localhost:3009';
-  
+  public  Status: any;
   constructor(public http:HttpClient) { }
 ​
   // getting all todos

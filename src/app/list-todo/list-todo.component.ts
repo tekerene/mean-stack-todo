@@ -2,16 +2,20 @@ import {Component, OnInit} from '@angular/core';
 import {TodoService} from '../services/todo.service';
 import { Status } from '../model/status';
 
-@Component({selector: 'app-list-todo', templateUrl: './list-todo.component.html', styleUrls: ['./list-todo.component.css']})
+@Component({
+selector: 'app-list-todo', 
+templateUrl: './list-todo.component.html',
+styleUrls: ['./list-todo.component.css']})
 
 export class ListTodoComponent implements OnInit {
     currentTodo = null;
     todoData : any = [];
-    isActive = false;
+    //isActive = false;
     istaskCompleted = false;
 
     _todos = [];
     overdue = "overdue";
+    
     completed = "completed";
     pending = "pending";
     taskDate: Date;
@@ -21,21 +25,21 @@ export class ListTodoComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.todoService.getTodos().subscribe((todoData) => {
-        this._todos = todoData;
-        const presentDate = new Date(new Date().toISOString());
-        for (let i = 0; i < this._todos.length; i++) {
-          this.taskDate = new Date(new Date(this._todos[i].date).toISOString());
-          if ((this.taskDate < presentDate) && (this._todos[i].status !== this.completed)) {
-            this.todoService.updateTodoStatus(this._todos[i]._id, this.overdue).subscribe();
-          }
-        }
-      })
-    }
+    //   this.todoService.getTodos().subscribe((todoData) => {
+    //     this._todos = todoData;
+    //     const presentDate = new Date(new Date().toISOString());
+    //     for (let i = 0; i < this._todos.length; i++) {
+    //       this.taskDate = new Date(new Date(this._todos[i].date).toISOString());
+    //       if ((this.taskDate < presentDate) && (this._todos[i].status !== this.completed)) {
+    //         this.todoService.updateTodoStatus(this._todos[i]._id, this.overdue).subscribe();
+    //       }
+    //     }
+    //   })
+     }
 
     taskCompleted(todo) {
         this.istaskCompleted = true;
-        if (todo.status === this.pending) {
+        if (this.todoService.Status === this.pending) {
           this.todoService.updateTodoStatus(todo._id, this.completed).subscribe((todo) => {
             this._todos.forEach((item) => {
               if (item._id === todo._id) {
@@ -61,9 +65,9 @@ export class ListTodoComponent implements OnInit {
         this.todoService.getTodos().subscribe((data) => {
             this.todoData = data;
             console.log(data)
-            // this.todoData.forEach(todo => {
-            //      console.log(`********************************* ${todo.imageUrl}`);
-            // });
+            this.todoData.forEach(todo => {
+                 console.log(`********************************* ${todo.imageUrl}`);
+            });
         });
     }
     removeTodo(todo, index) {
@@ -71,24 +75,26 @@ export class ListTodoComponent implements OnInit {
             this.todoService.deleteTodo(todo._id).subscribe((data) => {
                 this.todoData.splice(index, 1);
                 console.log(data +"************* Todo deleted successfully ***")
+            window.location.reload();
             })
         }
+        
     }
 
     // changing the state of the cards
     
-    onClick(e) {
-        if (this.isActive == true){
-            this.isActive = !this.isActive;
-        }
-        else {
-            this.isActive == false;
-        }
+    // onClick(e) {
+    //     if (this.isActive == false){
+    //         this.isActive = true;
+    //     }
+    //     else {
+    //         this.isActive = false;
+    //     }
         
-        // e.preventDefault();
+    //     // e.preventDefault();
         
-        console.log("********************8change state ******************************")
+    //     console.log("********************8change state ******************************")
         
-    }
+    // }
 }
 

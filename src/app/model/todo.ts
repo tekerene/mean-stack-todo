@@ -1,6 +1,11 @@
 export class Todo {
-    title: string;
-    desc: string;
-    imageUrl: string;
-    date: string;
+    title: String
+    desc: String
+    imageUrl: String
+    date: {
+        startDate: String,
+        endDate: String
+    }
+    author: String
+    status: boolean
 }

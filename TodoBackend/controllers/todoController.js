@@ -1,25 +1,29 @@
 const Todo = require('../models/Todo');
+
 exports.index = function (req, res) {
     res.send('Server running');
 };
 exports.addTodos = (req, res) => {
+   
     // * Create a Task
     const todo = new Todo({
         title: req.body.title,
         desc: req.body.desc,
-        date: req.body.date,
         imageUrl: req.body.imageUrl,
-        // time: req.body.time,
+        date: req.body.date,
+        author: req.body.author,
         status: req.body.status,
     })
-    console.log(todo);
+    console.log(req.body);
+   
     // Save todo to database
-    todo.save((err) => {
+    todo.save((err, data) => {
         if (err) {
             res.send('err')
             console.log(err)
         } else {
             res.send('ok')
+            console.log(data +"todo successfully added")
         }
     })
 }
@@ -88,7 +92,6 @@ exports.updateTodo = (req, res) => {
     })
         .then((todo) => {
             if (!todo) {
-
                 return res.status(404).send({
                     message: "No Todo Found"
                 })

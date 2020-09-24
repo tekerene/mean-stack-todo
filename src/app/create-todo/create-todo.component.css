@@ -3,15 +3,15 @@
     padding: 6px 12px 6px 12px;
     border: 1px solid #000;
     border-radius: 5px;
-    height: 79vh;
+    height: 65vh;
     width: 92%;
     /* overflow-y: hidden; */
 }
 
 input,
 textarea {
-    background: #f3f1f1;
-    padding: 27px;
+    background: #ebe8e8;
+    padding: 17px 5px;
     text-align: left;
     border: none;
     box-shadow: 0 3px 6px #00000029;
@@ -19,7 +19,7 @@ textarea {
     font-size: 23px;
 }
 .form-group {
-    margin-bottom: 0.4em;
+    margin-bottom: 0em;
     border: 1px solid #F3F3F3;
 }
 .input-date {
@@ -57,7 +57,7 @@ textarea {
     color: #fff;
 }
 /*  Medium devices (desktop, 1440px and 2056px) */
-@media(min-width: 1442.98px) and(max-width: 2565px) {
+@media(min-width: 1442.98px) and (max-width: 2565px) {
     .create-todo {
         margin: 6em 1em 6em 2em;
         padding: 16px 34px 21px 30px;
@@ -68,29 +68,29 @@ textarea {
 }
 
 /*  Medium devices (laptop, 1024px and up to 1440px) */
-@media(min-width: 1022px) and(max-width: 1442.98px) {
+@media(min-width: 1022px) and (max-width: 1442.98px) {
     .create-todo {
         margin: 4em 1em 2em 2em;
         padding: 5px 16px 6px 15px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 87vh;
+        height: 75vh;
     }
 }
 
 /*  Medium devices (tablets, 768px and 1024px) */
-@media(min-width: 768px) and(max-width: 1022px) {
+@media(min-width: 768px) and (max-width: 1022px) {
     .create-todo {
         margin: 4em 0 0 1em;
         padding: 0 5px 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 74vh;
+        height: 76vh;
     }
 }
 
 /* Small devices (landscape phones, 576px and up to 767.98 width) */
-@media(min-width: 576px) and(max-width: 767.98px) {
+@media(min-width: 576px) and (max-width: 767.98px) {
     .create-todo {
         margin: 0.2em 4em 1em;
         padding: 0 20px;
@@ -108,7 +108,7 @@ textarea {
         padding: 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 65vh;
+        height: 75vh;
     }
     button {
         margin: 0 -10px;
