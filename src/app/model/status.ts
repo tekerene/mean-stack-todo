@@ -1,6 +1,6 @@
 export class Status {
-    completed: "completed";
-    pending: "pending";
-    overdue: "overdue";
-    public _id: any;
+    static completed: "completed";
+    static overdue: "overdue";
+  static pending: "pending";
+  public _id: any;
 }

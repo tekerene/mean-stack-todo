@@ -10,7 +10,7 @@
             <label for="title"></label>
             <input type="text" maxlength="100" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
             <span class="max-desc">{{inputVal}}/100max</span>
-            <div class="invalid-feedback" *ngIf="submitted && todoForm.title.errors?.required">
+            <div class="invalid-feedback" *ngIf="submitted && todoForm.value.title.errors?.required">
                 Title is required.
               </div>
         </div>
@@ -33,13 +33,13 @@
             </div>
             <div class="d-flex">
                 <div class="form-group dateTime">
-                    <input type="datetime-local" 
+                    <input type="datetime" 
                     ngxDaterangepickerMd
                     [lockStartDate]="false"
                      [(ngModel)]="selected" 
                      class="form-control"
                      formControlName="date" 
-                    placeholder="dd/mm/yyyy h:i:s" 
+                    placeholder="dd/mm/yyyy h" 
                     id="date">
                 </div>
                  <button type="submit" class="btn-lg">Add</button>

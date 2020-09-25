@@ -4,7 +4,6 @@ exports.index = function (req, res) {
     res.send('Server running');
 };
 exports.addTodos = (req, res) => {
-   
     // * Create a Task
     const todo = new Todo({
         title: req.body.title,

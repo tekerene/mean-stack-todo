@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+var date = new Date();
+date.toString();
 let Todo = new Schema({
     title: String,
     desc: String,
@@ -11,9 +12,9 @@ let Todo = new Schema({
     },
     author: String,
     status: {
-        type: Boolean,
+        type: String,
         default: "pending"
-    }
+    },
 }, {collection: 'todos'})
 
 module.exports = mongoose.model('todo', Todo)

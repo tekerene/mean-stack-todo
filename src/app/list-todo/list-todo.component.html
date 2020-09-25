@@ -5,8 +5,8 @@
 
     <div *ngIf="todoData.length > 0">
 
-        <div *ngFor="let todo of todoData; let i = index" class="card pending" [ngClass]="{'pending': todo?.status !== overdue, 'completed': todo?.status === completed, 'overdue': todo?.status === overdue}">
-            <div class="d-flex w-100">
+        <div *ngFor="let todo of todoData; let i = index" class="card pending">
+            <div class="d-flex w-100" [ngClass]="{'pending': todo?.status !== overdue, 'completed': todo?.status === completed, 'overdue': todo?.status === overdue}">
                 <div class="card-header">
                     <img src="http://localhost:3009{{todo?.imageUrl}}" alt="">
                 </div>

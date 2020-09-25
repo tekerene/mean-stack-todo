@@ -29,9 +29,9 @@ export class TodoService {
     return this.http.post<Todo[]>(url, data);
   }
   // Updating the status of a todo
-  updateTodoStatus(id, status):Observable<any>{
+  updateTodoStatus(id, status):Observable<Status>{
     const url = `${this.baseUrl}${endpoints.updateTodo}${id}`;
-    return this.http.put<any>(url, {
+    return this.http.put<Status>(url, {
       status
     });
   }

@@ -11,13 +11,13 @@ export class ListTodoComponent implements OnInit {
     currentTodo = null;
     todoData : any = [];
     //isActive = false;
-    istaskCompleted = false;
 
+    istaskCompleted = false;
     _todos = [];
-    overdue = "overdue";
-    
-    completed = "completed";
-    pending = "pending";
+    overdue = Status["overdue"];
+    completed = Status["completed"];
+    pending = Status["pending"];
+
     taskDate: Date;
     
     constructor(private todoService : TodoService) {
@@ -39,20 +39,20 @@ export class ListTodoComponent implements OnInit {
 
     taskCompleted(todo) {
         this.istaskCompleted = true;
-        if (this.todoService.Status === this.pending) {
-          this.todoService.updateTodoStatus(todo._id, this.completed).subscribe((todo) => {
+        if (todo.status === Status.pending) {
+          this.todoService.updateTodoStatus(todo._id, Status.completed).subscribe((todo) => {
             this._todos.forEach((item) => {
               if (item._id === todo._id) {
-                item.status = this.completed;
+                item.status = Status.completed;
               }
             })
           }
           );
-        } else if (todo.status === this.completed) {
-          this.todoService.updateTodoStatus(todo._id, this.pending).subscribe((todo) => {
+        } else if (todo.status === Status.completed) {
+          this.todoService.updateTodoStatus(todo._id, Status.pending).subscribe((todo) => {
             this._todos.forEach((item) => {
               if (item._id === todo._id) {
-                item.status = this.pending;
+                item.status = Status.pending;
               }
             })
           });
