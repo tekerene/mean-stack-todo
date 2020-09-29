@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-var date = new Date();
-date.toString();
+const moment = require('moment')
+
 let Todo = new Schema({
     title: String,
     desc: String,

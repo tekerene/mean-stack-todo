@@ -74,7 +74,7 @@ textarea {
         padding: 5px 16px 6px 15px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 75vh;
+        height: 80vh;
     }
 }
 
@@ -85,18 +85,18 @@ textarea {
         padding: 0 5px 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 76vh;
+        height: 80vh;
     }
 }
 
 /* Small devices (landscape phones, 576px and up to 767.98 width) */
 @media(min-width: 576px) and (max-width: 767.98px) {
     .create-todo {
-        margin: 0.2em 4em 1em;
-        padding: 0 20px;
+        margin: 2.2em 2em 2em 1em;
+        padding: 0px 50px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 78vh;
+        height: 80vh;
     }
 
 }
@@ -108,7 +108,7 @@ textarea {
         padding: 0 20px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 75vh;
+        height: 85vh;
     }
     button {
         margin: 0 -10px;

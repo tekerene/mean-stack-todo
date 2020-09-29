@@ -1,5 +1,5 @@
 const Todo = require('../models/Todo');
-
+const moment = require('moment');
 exports.index = function (req, res) {
     res.send('Server running');
 };
@@ -27,7 +27,9 @@ exports.addTodos = (req, res) => {
     })
 }
 // getting all task
-exports.getTodos = (req, res) => {
+
+exports.getTodos = (req, res, reqDate) => {
+    
     Todo.find()
         .sort({
             _id: -1,

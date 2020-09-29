@@ -1,8 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Moment} from 'moment';
-import {Form, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TodoService} from '../services/todo.service';
+import { Moment } from 'moment';
+import 'moment/locale/pt-br';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TodoService } from '../services/todo.service';
 import { Todo } from '../model/todo'
+import * as moment from 'moment';
+import 'moment/locale/pt-br';
 
 @Component({
     selector: 'app-create-todo',
@@ -11,6 +14,7 @@ import { Todo } from '../model/todo'
 })
 
 export class CreateTodoComponent implements OnInit {
+    
     @Input() todos:Todo;
     submitted = false;
     inputVal = 0;
@@ -19,43 +23,28 @@ export class CreateTodoComponent implements OnInit {
     inputMax = 0;
     public imagePath : any;
 
-    // datainput = {
-    //     title: "",
-    //     desc: "",
-    //     imageUrl: "",
-    //     date: {
-    //         startDate: "",
-    //         endDate: ""
-    //     },
-    //     author: ""
-    // };
 
     //public todoForm: FormGroup;
-
+    
     selected : {
         startDate: Moment,
         endDate: Moment
     };
     todoForm: FormGroup;
     picker: any;
-   
     constructor(public fb : FormBuilder, public todoService : TodoService) {this.mainForm()}
 
    
-    ngOnInit(): void {  
-        
-}
-mainForm() {
-    this.todoForm = this.fb.group({
-        title: ['',[Validators.required, Validators.maxLength(100)]],
-        desc: ['',[ Validators.required, Validators.maxLength(250)]],
-        imageUrl: ['',[Validators.required]],
-        date: ['',[Validators.required]],
-        author: ['',[Validators.required]],
-    });
-}
-
-
+    ngOnInit(): void {}
+    mainForm() {
+        this.todoForm = this.fb.group({
+            title: ['',[Validators.required, Validators.maxLength(100)]],
+            desc: ['',[ Validators.required, Validators.maxLength(250)]],
+            imageUrl: ['',[Validators.required]],
+            date: ['',[Validators.required]],
+            author: ['',[Validators.required]],
+        });
+    }
     // SHOW DATE AND TIME LIMIT
     public updateDateRange() {
         this.picker.datePicker.startDate('23/09/2020');
@@ -74,18 +63,21 @@ mainForm() {
             this.imagePath = path.imgPath;
         });
     }
-
     // function to submit a new task to the database
-
-    
-    
+        
         onSubmit() {
             this.submitted = true;
             //console.log(this.todoForm.value);
             this.todoForm.value.imageUrl = this.imagePath;
-            //console.log(this.todoForm.value);
+
+            moment.locale('en');
+            let startFormat = moment().calendar();  
+            let endFormat = moment().endOf('minutes').fromNow();
+            this.todoForm.value.date.startDate = startFormat;
+            this.todoForm.value.date.endDate = endFormat;
+
             this.todoService.addTodo(this.todoForm.value).subscribe((val) => { 
-                console.log("Todo successfully submittef"+this.todoForm.value)
+                console.log("Todo successfully submitted"+this.todoForm.value)
             }); 
              window.location.reload();
         }
@@ -99,4 +91,5 @@ mainForm() {
         this.textVal = this.text + e.target.value.length;
         // console.log(e);
     }
+
 }
