@@ -9,8 +9,10 @@ exports.addTodos = (req, res) => {
         title: req.body.title,
         desc: req.body.desc,
         imageUrl: req.body.imageUrl,
-        date: req.body.date,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
         author: req.body.author,
+        timeCreated: req.body.timeCreated,
         status: req.body.status,
     })
     console.log(req.body);

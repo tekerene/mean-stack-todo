@@ -37,14 +37,34 @@
             </div>
             <div class="d-flex">
                 <div class="form-group dateTime">
-                    <input type="datetime" 
-                    ngxDaterangepickerMd
-                    [lockStartDate]="false"
-                     [(ngModel)]="selected" 
-                     class="form-control"
-                     formControlName="date" 
-                     placeholder="startDate  endDate"
-                    id="date">
+                    <input type="datetime-local"
+                    [singleDatePicker]="true"
+                    [timePicker]="true"
+                    [timePickerSeconds]="true"
+                    [timePickerIncrement]="15"
+                    [timePicker24Hour]="true"
+                    [locale]="locale"
+                    [locale]="{format: 'DD-MM-YYYY h:i', firstDay: 1}"                     
+                    [(ngModel)]="selected" 
+                     class="datePicker form-control"
+                     formControlName="startDate" 
+                     placeholder="startDate"
+                    id="startDate">
+                </div>
+                <div class="form-group dateTime">
+                    <input type="datetime-local"
+                    [singleDatePicker]="true"
+                    [timePicker]="true"
+                    [timePickerSeconds]="true"
+                    [timePickerIncrement]="15"
+                    [timePicker24Hour]="true"
+                    [locale]="locale"
+                    [locale]="{format: 'YYYY-Do-MMM  h:m', firstDay: 0}"                      
+                    [(ngModel)]="selected"
+                    formControlName="endDate" 
+                    id="endDate"
+                    placeholder="endDate"
+                    class="form-control"/>
                 </div>
                  <button type="submit" class="btn-lg">Add</button>
             </div>

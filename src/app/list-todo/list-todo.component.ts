@@ -89,17 +89,37 @@ export class ListTodoComponent implements OnInit {
         this.todoService.getTodos().subscribe((data) => {
             this.todoData = data;
             console.log(data);
+            const formatTime = moment(moment.now());
             this.todoData.forEach(todo => {
                 console.log(`********************************* ${todo.imageUrl}`);
                 // console.log("####### " + this.pageLoaded.toString())
               //this.currentTime = moment().format('LTS');
+              const timer = moment(parseInt(todo.timeCreated));
+                todo.diff = formatTime.diff(timer,'minute')
+
+             if(todo.diff < 60 ){
+                 if (todo.diff == 1){
+                     todo.diff + "minute"
+                 } else {
+                     todo.diff + "minutes"
+                 } 
+                }
+                  if (todo.diff > 60 && todo.diff == 360){
+                      if (todo.diff == 60){
+                          todo.diff + "hour"
+                      } else {
+                          todo.diff + "hours"
+                      }
+                  }
               this.pageLoaded = moment(new Date()).startOf('day').locale("en");
             });
         });  
     }
+
    /**
     * @Deleting a Todo
     */
+
     removeTodo(todo, index) {
         if (window.confirm('Are you sure?')) {
             this.todoService.deleteTodo(todo._id).subscribe((data) => {

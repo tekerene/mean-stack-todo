@@ -43,10 +43,11 @@ textarea {
     padding: 12px;
 }
 .dateTime {
-    width: 60%;
+    width: 30%;
     font-size: 1.8em !important;
     margin: 0.5em 0 !important;
     border-radius: 10px;
+    padding-right: 5px;
 }
 .custom-file-label {
     background: #313030;
@@ -56,6 +57,9 @@ textarea {
     font-weight: 600;
     color: #fff;
 }
+.datePicker  {
+    top:0;
+  }
 /*  Medium devices (desktop, 1440px and 2056px) */
 @media(min-width: 1442.98px) and (max-width: 2565px) {
     .create-todo {
@@ -74,7 +78,7 @@ textarea {
         padding: 5px 16px 6px 15px;
         border: 1px solid #000;
         border-radius: 5px;
-        height: 80vh;
+        height: 76vh;
     }
 }
 
@@ -86,6 +90,15 @@ textarea {
         border: 1px solid #000;
         border-radius: 5px;
         height: 80vh;
+    }
+    .btn-lg {
+        margin: 15px 4px 15px 12px;
+        padding: 1px 14px;
+        border-radius: 10px;
+        font-size: 1.9em;
+        color: #fff;
+        font-weight: 700;
+        background-color: #F79623;
     }
 }
 
@@ -125,5 +138,18 @@ textarea {
     .form-group {
         margin-bottom: 0.4em;
         border: 1px solid #F3F3F3;
+    }
+}
+
+/* small devices below the width size of 400px */
+@media(max-width: 400px) {
+    .btn-lg {
+        margin: 15px 4px 15px 12px;
+        padding: 2px 20px;
+        border-radius: 10px;
+        font-size: 1.3em;
+        color: #fff;
+        font-weight: 700;
+        background-color: #F79623;
     }
 }

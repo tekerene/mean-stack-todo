@@ -6,11 +6,10 @@ let Todo = new Schema({
     title: String,
     desc: String,
     imageUrl: String,
-    date: {
-        startDate: String,
-        endDate: String
-    },
+    startDate: String,
+    endDate: String,
     author: String,
+    timeCreated: String,
     status: {
         type: String,
         default: "pending"
