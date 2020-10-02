@@ -38,21 +38,14 @@
             <div class="d-flex">
                 <div class="form-group dateTime">
                     <input type="datetime-local"
-                    [singleDatePicker]="true"
-                    [timePicker]="true"
-                    [timePickerSeconds]="true"
-                    [timePickerIncrement]="15"
-                    [timePicker24Hour]="true"
-                    [locale]="locale"
-                    [locale]="{format: 'DD-MM-YYYY h:i', firstDay: 1}"                     
                     [(ngModel)]="selected" 
                      class="datePicker form-control"
                      formControlName="startDate" 
                      placeholder="startDate"
                     id="startDate">
                 </div>
-                <div class="form-group dateTime">
-                    <input type="datetime-local"
+                <!-- <div class="form-group dateTime">
+                    <input type="datetime"
                     [singleDatePicker]="true"
                     [timePicker]="true"
                     [timePickerSeconds]="true"
@@ -65,7 +58,7 @@
                     id="endDate"
                     placeholder="endDate"
                     class="form-control"/>
-                </div>
+                </div> -->
                  <button type="submit" class="btn-lg">Add</button>
             </div>
         </div>

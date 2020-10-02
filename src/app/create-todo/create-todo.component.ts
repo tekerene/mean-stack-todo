@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Moment } from 'moment';
-import 'moment/locale/pt-br';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../model/todo'

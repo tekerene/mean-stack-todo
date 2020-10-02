@@ -1,7 +1,11 @@
+<div class="filter">
+    <div class="filter-todo">
+        <input type="text" class="form-control" placeholder="Filter Todo" [(ngModel)]="search" (ngModelChange)="todoSearch()">
+    </div>
+  </div>
+
 <div class="list-todo">
-
     <tr *ngIf="todoData.length <=0" class="no-data text-center">There is no todo added yet!></tr>
-
 
     <div *ngIf="todoData.length > 0">
 
@@ -17,13 +21,13 @@
                     <p class="card-text">{{todo?.desc }}</p>
                   <div class="dateTime d-flex">
                     <h4 class="mr-2"><strong>startDate:</strong>  {{todo?.startDate }}</h4>
-                    <h4 class="ml-2"> <strong> endDate: </strong>{{todo?.endDate }}</h4>
-                    <span class="relativeTime">{{ todo.diff }} min ago</span>
+                    <h4 class="ml-2"> <strong> </strong>{{todo?.endDate }}</h4>
+                    <span class="relativeTime">{{ todo.diff }}</span>
                   </div>
                     <h3 class="author mb-4"><strong>Author:</strong> {{todo.author}}</h3>
               </div>
                 <div class="custom-control" >
-                    <i [ngClass]="taskCompleted(todo)" class="status fa fa-check-circle"></i>
+                    <i class="status fa fa-check-circle"></i>
                     <i (click)="removeTodo(todo, i)" class="fa fa-trash"></i>
                     <i class="update fa fa-edit"></i>
                 </div>

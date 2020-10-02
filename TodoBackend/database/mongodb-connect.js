@@ -6,7 +6,7 @@ useCreateIndex: true}, (er)=>{
   if(!er){
     console.log('Successfully Connected To Database')
   }else {
-    console.log('Failled To Connect TO Database')
+    console.log(err +'Failled To Connect TO Database')
   }
 })
 module.exports = mongoose;
