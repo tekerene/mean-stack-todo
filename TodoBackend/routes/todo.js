@@ -10,7 +10,7 @@ const todo_controller = require('../controllers/todoController.js');
 router.get(endpoints.todos, todo_controller.getTodos);
 router.get(endpoints.todo, todo_controller.getTodo);
 router.post(endpoints.addTodo, todo_controller.addTodos);
-router.put(endpoints.updateTodo, todo_controller.updateTodo);
+router.patch(endpoints.updateTodo, todo_controller.updateTodo);
 router.delete(endpoints.deleteTodo, todo_controller.deleteTodo);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

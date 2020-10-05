@@ -1,5 +1,6 @@
 const Todo = require('../models/Todo');
 const moment = require('moment');
+const { ObjectUnsubscribedError } = require('rxjs');
 exports.index = function (req, res) {
     res.send('Server running');
 };
@@ -89,21 +90,33 @@ exports.deleteTodo = (req, res) => {
 }
 // Update a task with the specified id in the request
 exports.updateTodo = (req, res) => {
+   
+    
+    const todo = {
+        title: req.body.title,
+        desc: req.body.desc,
+        imageUrl: req.body.imageUrl,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
+        author: req.body.author,
+        status: req.body.status,
+    };
+    console.log(todo);
     Todo.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         status: 'not completed'
-    })
-        .then((todo) => {
+    }).then((todo) => {
             if (!todo) {
                 return res.status(404).send({
                     message: "No Todo Found"
                 })
             }
             res.status(200).send(todo)
+            console.log("Todo successfully updated" +todo)
         })
         .catch((er) => {
             return res.status(404).send({
                 message: "error while updating the todo",
             });
         })
-}
+    }
