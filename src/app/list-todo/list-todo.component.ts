@@ -78,7 +78,7 @@ export class ListTodoComponent  {
      * @param index 
      */
 
-    onEditTodo(todo: any){
+    git(todo: any){
         this.update.emit(todo);
     }
 
