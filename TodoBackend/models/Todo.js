@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const moment = require('moment')
+const moment = require('moment');
+const { stringify } = require('querystring');
 
 let Todo = new Schema({
     title: String,
@@ -10,6 +11,9 @@ let Todo = new Schema({
     endDate: String,
     author: String,
     timeCreated: String,
+    updatedTime: {
+        type: String
+    },
     status: {
         type: String,
         default: "pending"

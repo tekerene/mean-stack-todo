@@ -11,6 +11,7 @@ import { endpoints } from '../endpoint.config';
 export class TodoService {
   baseUrl = 'http://localhost:3009';
   public  Status: any;
+  selectedTodo: Todo;
   constructor(public http:HttpClient) { }
 ​
   // getting all todos
@@ -43,7 +44,15 @@ export class TodoService {
   // Updating a Todo
   updateTodo(id, body):Observable<Todo[]>{
     const url = `${this.baseUrl}${endpoints.updateTodo}${id}`;
-    return this.http.put<Todo[]>(url, body);
+    return this.http.put<Todo[]>(url, 
+      {title:body.title,
+      desc: body.desc, 
+      imageUrl:body.imageUrl,
+      startDate: body.startDate, 
+      endDate: body.endDate,
+      author:body.author,
+      timeCreated: body.timeCreated,
+      updatedTime: body.updatedTime});
   }
 
   // upload image

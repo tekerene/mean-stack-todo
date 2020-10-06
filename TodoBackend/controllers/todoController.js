@@ -14,6 +14,7 @@ exports.addTodos = (req, res) => {
         endDate: req.body.endDate,
         author: req.body.author,
         timeCreated: req.body.timeCreated,
+        updateTime: req.body.updateTime,
         status: req.body.status,
     })
     console.log(req.body);
@@ -99,6 +100,8 @@ exports.updateTodo = (req, res) => {
         startDate: req.body.startDate,
         endDate: req.body.endDate,
         author: req.body.author,
+        timeCreated: req.body.timeCreated,
+        updateTime: req.body.updateTime,
         status: req.body.status,
     };
     console.log(todo);

@@ -8,7 +8,7 @@
     <form [formGroup]='todoForm' (ngSubmit)="onSubmit()" enctype="multipart/form-data" autocomplete="off">
         <div class="form-group">
             <label for="title"></label>
-            <input type="text" maxlength="100" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
+            <input type="text" maxlength="100" [(ngModel)]="selectedTodo.title" (keyup)="wordCount($event)" name="title" formControlName="title" class="form-control" id="title" placeholder="Title" required>
             <span class="max-desc">{{inputVal}}/100max</span>
             <div class="invalid-feedback" *ngIf="submitted && todoForm.value.title.errors?.required">
                 Title is required.
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
             <label for="desc"></label>
-            <textarea name="desc" maxlength="280" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6" placeholder="Description" required></textarea>
+            <textarea name="desc" maxlength="280" [(ngModel)]="selectedTodo.desc" (keyup)="textCount($event)" id="desc" formControlName="desc" class="form-control" cols="" rows="6" placeholder="Description" required></textarea>
             <span class="max-desc">{{textVal}}/280max</span>
             <div class="invalid-feedback" *ngIf="submitted && todoForm.value.desc.errors?.required">
                 Description is required.
@@ -27,18 +27,19 @@
         <div class="custom-file mb-3">
             <div class="form-group">
                 <label for="imageUrl"></label>
-                <input type="file" name="imageUrl" formControlName="imageUrl" (change)="imageUpload($event)" class="custom-file-input" id="imageUrl" required>
+                <input type="file" name="imageUrl" [(ngModel)]="selectedTodo.imageUrl" formControlName="imageUrl" (change)="imageUpload($event)" class="custom-file-input" id="imageUrl" required>
                 <label class="custom-file-label">Choose file...</label>
                 <div class="invalid-feedback"></div>
             </div>
             <div class="form-group">
                 <label for="author"></label>
-                <input type="text" name="author" formControlName="author" placeholder="Author" class="form-control">
+                <input type="text" name="author" [(ngModel)]="selectedTodo.author" formControlName="author" placeholder="Author" class="form-control">
             </div>
             <div class="d-flex">
                 <div class="form-group dateTime">
                     <input type="datetime-local"
                     [(ngModel)]="selected" 
+                    [(ngModel)]="selectedTodo.startDate"
                      class="datePicker form-control"
                      formControlName="startDate" 
                      placeholder="startDate"
@@ -59,7 +60,12 @@
                     placeholder="endDate"
                     class="form-control"/>
                 </div> -->
-                 <button type="submit" class="btn-lg">Add</button>
+                 <button *ngIf="showData; else update" type="submit" class="btn-lg">Add</button>
+                 <ng-template #update>
+                       <button (click)="updateTodoData()" type="button">edit</button>
+                 </ng-template>
+                 
+               
             </div>
         </div>
     </form>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { ListTodoComponent } from './list-todo/list-todo.component';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  @ViewChild (ListTodoComponent, {static: false})
+  private createTodo: ListTodoComponent;
   title = 'Todo';
  
+
+  onEditTodo(e) {
+  this.createTodo.onEditTodo(e);
+  }
+
 }

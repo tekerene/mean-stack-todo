@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Moment } from 'moment';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../model/todo'
 import * as moment from 'moment';  
@@ -21,7 +21,6 @@ export class CreateTodoComponent implements OnInit {
     inputMax = 0;
     public imagePath : any;
 
-
     //public todoForm: FormGroup;
     
     selected : {
@@ -32,8 +31,22 @@ export class CreateTodoComponent implements OnInit {
     picker: any;
     constructor(public fb : FormBuilder, public todoService : TodoService) {this.mainForm()}
 
-   
+    selectedTodo = {
+        _id: "",
+        title: "",
+        desc: "",
+        imageUrl: "",
+        startDate:"",
+        endDate: "",
+        author: "",
+        updatedTime: null,
+        timeCreated: null
+    }
+    showData = true;
+    id = "";
+
     ngOnInit(): void {}
+    
     mainForm() {
         this.todoForm = this.fb.group({
             title: ['',[Validators.required, Validators.maxLength(100)]],
@@ -44,11 +57,8 @@ export class CreateTodoComponent implements OnInit {
             author: ['',[Validators.required]],
         });
     }
-    // SHOW DATE AND TIME LIMIT
-    // public updateDateRange() {
-    //     this.picker.datePicker.startDate('23/09/2020');
-    //     this.picker.datePicker.endDate('2017-04-2021');
-    // }
+
+    
     //function to upload image and save in the serve uploads folder
     imageUpload(e : {
         target: {
@@ -62,24 +72,54 @@ export class CreateTodoComponent implements OnInit {
             this.imagePath = path.imgPath;
         });
     }
+
+
     // function to submit a new task to the database
         
         onSubmit() {
             this.submitted = true;
-            //console.log(this.todoForm.value);
             this.todoForm.value.imageUrl = this.imagePath;
-
-             moment.locale('en');
+            moment.locale('en');
              //let startFormat = moment().format('DD-MM-YYYY, h:mm a');  
             // let endFormat = moment().add(10, 'days').calendar();   
             // this.todoForm.value.startDate = startFormat;
-             //this.todoForm.value.endDate = startFormat;
+            //this.todoForm.value.endDate = startFormat;
             this.todoForm.value.timeCreated = moment.now();
             this.todoService.addTodo(this.todoForm.value).subscribe((val) => { 
                 console.log("Todo successfully submitted"+this.todoForm.value)
             }); 
              window.location.reload();
-        }
+            } 
+          
+     /*
+     * @param todo 
+     * @param index 
+     */
+    onEditTodo(todo: {
+        _id: any, title: string, desc: string,
+         imageUrl:any, author: string,
+          startDate: any, endDate: any,
+           updatedTime: string, timeCreated: string   }){
+        this.showData = false
+        this.selectedTodo = todo._id;
+        this.selectedTodo.title = todo.title;
+        this.selectedTodo.desc = todo.desc;
+        this.selectedTodo.imageUrl = todo.imageUrl;
+        this.selectedTodo.author = todo.author;
+        this.selectedTodo.startDate = todo.startDate;
+        this.selectedTodo.endDate = todo.endDate;
+        this.selectedTodo.updatedTime = todo.updatedTime;
+        this.selectedTodo.timeCreated = todo.timeCreated;
+        console.log(todo._id)
+         }
+    updateTodoData(){
+        this.selectedTodo.updatedTime = moment.now();
+        console.log(this.selectedTodo.updatedTime)
+        this.todoService.updateTodo(this.id, this.selectedTodo).subscribe((val)=>{
+            console.log(val);
+           
+        })
+         }
     
     wordCount(e) {
         this.inputVal = this.inputMax + e.target.value.length;
