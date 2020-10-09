@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { ListTodoComponent } from './list-todo/list-todo.component';
 
 @Component({
@@ -8,13 +9,18 @@ import { ListTodoComponent } from './list-todo/list-todo.component';
 })
 
 export class AppComponent {
-  @ViewChild (ListTodoComponent, {static: false})
-  private createTodo: ListTodoComponent;
+  @ViewChild (CreateTodoComponent, {static: false})
+  private createTodo: CreateTodoComponent;
+  //public createTodo = '';
   title = 'Todo';
  
+  // onEditTodo($event: any) {
+  //   this.createTodo = $event;
+  //   }
+  
 
-  onEditTodo(e) {
-  this.createTodo.onEditTodo(e);
+  onEditTodo(event: any) {
+  this.createTodo.onEditTodo(event);
   }
 
 }

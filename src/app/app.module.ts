@@ -12,13 +12,17 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateTodoComponent,
-    ListTodoComponent
+    ListTodoComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     ReactiveFormsModule,
     NgxDaterangepickerMd.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    CommonModule
   ],
   providers: [TodoService],
   bootstrap: [AppComponent]

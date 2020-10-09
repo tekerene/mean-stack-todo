@@ -45,17 +45,17 @@ export class ListTodoComponent  {
         this.todoService.getTodos().subscribe((data) => {
             // console.log(data)
             this.todoData = data;
-            this.todoData.forEach((todo: {updatedTime: null, timeCreated: null, diff: string, update: string, imageUrl: string}) => {
-                console.log(`***************** ${todo.imageUrl} ****************`);
+            this.todoData.forEach((todo: {updatedTime: string, timeCreated: string, diff: string, update: string, imageUrl: string}) => {
+                //console.log(`***************** ${todo.imageUrl} ****************`);
+               // console.log(todo.timeCreated);
             const timer = moment(parseInt(todo.timeCreated));
-            const dd = moment(timer,'YYYY-MM-DD hh:mm').fromNow()  
-            // const date = moment(todo.startDate, 'YYYY-MM-DD hh:mm').fromNow();
-               todo.diff = "added "+ dd;
-               //console.log(todo)
-               const updateTime = moment(parseInt(todo.updatedTime));
-               const pp = moment(updateTime, 'YYYY-MM-DD hh:mm').fromNow();
-               todo.update = "updated"+ pp;
-
+            const dd = moment(timer,'YYYY-MM-DD hh:mm').fromNow() 
+                todo.diff = "added "+ dd;
+               
+            const updatett = moment(parseInt(todo.updatedTime));
+            const pp = moment(updatett, 'YYYY-MM-DD hh:mm').fromNow(); 
+                todo.update =  "updated"+ pp;
+            console.log(todo.update);
             });
         });  
     }
@@ -78,8 +78,10 @@ export class ListTodoComponent  {
      * @param index 
      */
 
-    git(todo: any){
-        this.update.emit(todo);
+    onEditTodo(todo: any){
+         this.update.emit(todo);
+         //console.log(todo)
+       
     }
 
    /**

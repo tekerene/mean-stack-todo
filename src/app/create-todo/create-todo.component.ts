@@ -20,6 +20,7 @@ export class CreateTodoComponent implements OnInit {
     text = 0;
     inputMax = 0;
     public imagePath : any;
+    todoList: any = [];
 
     //public todoForm: FormGroup;
     
@@ -57,8 +58,6 @@ export class CreateTodoComponent implements OnInit {
             author: ['',[Validators.required]],
         });
     }
-
-    
     //function to upload image and save in the serve uploads folder
     imageUpload(e : {
         target: {
@@ -72,11 +71,9 @@ export class CreateTodoComponent implements OnInit {
             this.imagePath = path.imgPath;
         });
     }
-
-
     // function to submit a new task to the database
         
-        onSubmit() {
+    onSubmit() {
             this.submitted = true;
             this.todoForm.value.imageUrl = this.imagePath;
             moment.locale('en');
@@ -89,19 +86,17 @@ export class CreateTodoComponent implements OnInit {
                 console.log("Todo successfully submitted"+this.todoForm.value)
             }); 
              window.location.reload();
-            } 
-          
+          } 
      /*
-     * @param todo 
+     * @param update todo 
      * @param index 
      */
-    onEditTodo(todo: {
-        _id: any, title: string, desc: string,
-         imageUrl:any, author: string,
-          startDate: any, endDate: any,
-           updatedTime: string, timeCreated: string   }){
-        this.showData = false
-        this.selectedTodo = todo._id;
+    onEditTodo(todo: { _id: string; title: string; 
+        desc: string; imageUrl: string; author: 
+        string; startDate: string; endDate: string;
+         updatedTime: null; timeCreated: null; }){
+        this.showData = false;
+        this.id = todo._id;
         this.selectedTodo.title = todo.title;
         this.selectedTodo.desc = todo.desc;
         this.selectedTodo.imageUrl = todo.imageUrl;
@@ -110,20 +105,20 @@ export class CreateTodoComponent implements OnInit {
         this.selectedTodo.endDate = todo.endDate;
         this.selectedTodo.updatedTime = todo.updatedTime;
         this.selectedTodo.timeCreated = todo.timeCreated;
-        console.log(todo._id)
+        console.log(todo)
          }
     updateTodoData(){
-        this.selectedTodo.updatedTime = moment.now();
-        console.log(this.selectedTodo.updatedTime)
-        this.todoService.updateTodo(this.id, this.selectedTodo).subscribe((val)=>{
-            console.log(val);
-           
-        })
-         }
+         this.selectedTodo.updatedTime = moment.now();
+         //console.log(this.selectedTodo.updatedTime);
+        this.todoService.updateTodo(this.id, this.selectedTodo).subscribe((todo)=>{
+            this.todoList = todo;
+            
+          })
+           window.location.reload();
+        }
     
     wordCount(e) {
         this.inputVal = this.inputMax + e.target.value.length;
-
         // console.log(e);
     }
     textCount(e) {

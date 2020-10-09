@@ -22,14 +22,15 @@
                   <div class="dateTime d-flex">
                     <h4 class="mr-2"><strong>startDate:</strong>  {{todo?.startDate }}</h4>
                     <h4 class="ml-2"> <strong> </strong>{{todo?.endDate }}</h4>
-                    <span class="relativeTime">{{ todo?.diff }}</span>
+                    <span class="relativeTime">{{ todo.diff }}</span>
+                    <!-- <span *ngIf="invalid Date; else update" class="relativeTime">{{ todo?.update  }}</span> -->
                   </div>
                     <h3 class="author mb-4"><strong>Author:</strong> {{todo?.author}}</h3>
               </div>
                 <div class="custom-control" >
                     <i class="status fa fa-check-circle"></i>
                     <i (click)="removeTodo(todo)" class="fa fa-trash"></i>
-                    <i (click)="onEditTodo(todo, i)" class="update fa fa-edit"></i>
+                    <i (click)="onEditTodo(todo)" class="update fa fa-edit"></i>
                 </div>
             </div>
         </div>

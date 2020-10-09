@@ -1,0 +1,81 @@
+<section class="register"> 
+    <div class="jumbotron">
+        <h1 class="text-center">Registration Form</h1>
+    </div>
+    <div class="container">
+        <div class="form-banner">
+            <form  [formGroup]="signupForm" (ngSubmit)="onSubmit()" action="">
+                <div class="form-group">
+                    <label for="fullname"><span class="error">*</span></label>
+                    <input formControlName="fullname" type="text" name="fullname" [(ngModel)]="credentials.fullname" class="form-control" placeholder="FullName">
+                    <small class="error" *ngIf="f.fullname.invalid && (f.fullname.dirty || f.fullname.touched)">
+                        <div *ngIf="f.fullname.hasError('required')">This field is required.</div>
+                        <div *ngIf="f.fullname.hasError('fullname')">Enter valid fullname address.</div>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="username"> <span class="error">*</span></label>
+                    <input formControlName="username" type="text" name="username" [(ngModel)]="credentials.username" class="form-control" placeholder="UserName">
+                
+                <small class="error" *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)">
+                    <div *ngIf="f.username.hasError('required')">This field is required.</div>
+                    <div *ngIf="f.username.hasError('pattern')">Only alphanumeric is allowed.</div>
+                </small>
+            </div>
+                <div class="form-group">
+                    <label for="email"><span class="error">*</span></label>
+                    <input formControlName="email" type="email" name="email" [(ngModel)]="credentials.email" class="form-control" placeholder="Email">
+                    <small class="error" *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                        <div *ngIf="f.email.hasError('required')">This field is required.</div>
+                        <div *ngIf="f.email.hasError('email')">Enter valid email address.</div>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="password"><span class="error">*</span></label>
+                    <input formControlName="password" type="password" name="password" [(ngModel)]="credentials.password" class="form-control" placeholder="Password">
+                    <small class="error" *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                        <div *ngIf="f.password.hasError('required')">This field is required.</div>
+                        <div *ngIf="f.password.hasError('minlength')">Password must be at least 6 characters.</div>
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="confirmpassword"><span class="error">*</span></label>
+                    <input formControlName="confirmPassword" type="password" name="confirmpassword" class="form-control" placeholder="ConfirmPassword">
+                    <small class="error" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                        <div *ngIf="f.confirmPassword.hasError('required')">This field is required.</div>
+                    </small>
+                    <small class="error" *ngIf="signupForm.errors?.passwordmatch && (signupForm.dirty || signupForm.touched)">
+                        Password and confirm password must be match.
+                    </small>
+                </div>
+                <button type="submit" [disabled]="signupForm.invalid" class="btn bg-info">Register</button>
+               
+                <!-- <p>Already have an account</p> -->
+            </form>
+        </div>
+    </div>
+</section>
+
+<div class="table">
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>fullname</th>
+    <th>username/<th>
+        <th>email</th>
+        <th>password</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let user of userList; let i = index">
+            
+            <td>{{user._id}}</td>
+            <td>{{user?.fullname}}</td>
+            <td>{{user?.username}}</td>
+            <td>{{user?.email}}</td>
+            <td>{{user?.password}}</td>
+        </tr>
+    </tbody>
+    
+</div>

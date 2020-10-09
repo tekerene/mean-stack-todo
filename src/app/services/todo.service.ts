@@ -44,8 +44,9 @@ export class TodoService {
   // Updating a Todo
   updateTodo(id, body):Observable<Todo[]>{
     const url = `${this.baseUrl}${endpoints.updateTodo}${id}`;
-    return this.http.put<Todo[]>(url, 
-      {title:body.title,
+    return this.http.patch<Todo[]>(url, 
+      {_id: body._id,
+      title:body.title,
       desc: body.desc, 
       imageUrl:body.imageUrl,
       startDate: body.startDate, 

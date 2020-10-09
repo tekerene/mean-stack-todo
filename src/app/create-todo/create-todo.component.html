@@ -39,7 +39,6 @@
                 <div class="form-group dateTime">
                     <input type="datetime-local"
                     [(ngModel)]="selected" 
-                    [(ngModel)]="selectedTodo.startDate"
                      class="datePicker form-control"
                      formControlName="startDate" 
                      placeholder="startDate"
@@ -62,10 +61,8 @@
                 </div> -->
                  <button *ngIf="showData; else update" type="submit" class="btn-lg">Add</button>
                  <ng-template #update>
-                       <button (click)="updateTodoData()" type="button">edit</button>
+                       <button (click)="updateTodoData(i, todo)" class="btn-lg" type="button">Update</button>
                  </ng-template>
-                 
-               
             </div>
         </div>
     </form>

@@ -11,9 +11,7 @@ let Todo = new Schema({
     endDate: String,
     author: String,
     timeCreated: String,
-    updatedTime: {
-        type: String
-    },
+    updatedTime: String,
     status: {
         type: String,
         default: "pending"

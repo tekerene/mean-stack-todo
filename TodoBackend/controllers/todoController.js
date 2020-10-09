@@ -1,9 +1,5 @@
-const Todo = require('../models/Todo');
-const moment = require('moment');
-const { ObjectUnsubscribedError } = require('rxjs');
-exports.index = function (req, res) {
-    res.send('Server running');
-};
+const Todo = require('../models/Todo');;
+
 exports.addTodos = (req, res) => {
     // * Create a Task
     const todo = new Todo({
@@ -90,9 +86,8 @@ exports.deleteTodo = (req, res) => {
         });
 }
 // Update a task with the specified id in the request
+
 exports.updateTodo = (req, res) => {
-   
-    
     const todo = {
         title: req.body.title,
         desc: req.body.desc,
@@ -104,8 +99,8 @@ exports.updateTodo = (req, res) => {
         updateTime: req.body.updateTime,
         status: req.body.status,
     };
-    console.log(todo);
-    Todo.findByIdAndUpdate(req.params.id, req.body, {
+    
+    Todo.findByIdAndUpdate(req.params.id, todo, {
         new: true,
         status: 'not completed'
     }).then((todo) => {
@@ -122,4 +117,5 @@ exports.updateTodo = (req, res) => {
                 message: "error while updating the todo",
             });
         })
+        console.log(todo);
     }

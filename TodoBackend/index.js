@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
   
 const app = express();
 const todoRoute = require('./routes/todo')
+const userRoute = require('./routes/auth')
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 /**
@@ -13,7 +14,8 @@ app.use(express.urlencoded({extended: false}));
  */
 app.use(cors());
 app.options('*', cors());
-app.use('/', todoRoute)
+app.use('/', todoRoute);
+app.use('/user', userRoute);
 
 
 
