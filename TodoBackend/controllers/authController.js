@@ -1,5 +1,9 @@
 const User = require('../models/authModel');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const dotenv = require('dotenv');
+const hashPassword = require('../config/passwordHarsh');
+const FacebookStrategy = require('passport-facebook').Strategy;;
 
 exports.addUser = (req, res) => {
      // * Create a Task
@@ -11,16 +15,38 @@ exports.addUser = (req, res) => {
         confirmPassword: req.body.confirmPassword,
         
     })
-    console.log(req.body);
+    
+    const {fullname, username, email, password, confirmPassword} = req.body;
    
+    if (password === confirmPassword){
+        //check if users with the same email is also registered
+        if((!email === req.body.email)){
+        //   res.send("register", {
+        //       message: 'User already existed',
+        //       messageClass: 'alert-danger'
+        //   });  
+            console.log(email, "already exist")
+       
+          return;
+        
+        const hashPass = hashPassword.getHashPassword(password);
+        //store user into the database if you are using one
+        console.log(password);
+        User.push({
+            fullname, username, email, password: hashPass    
+        });
+    } 
+     } 
+     console.log(req.body);
+
     // Save user to database
     user.save((err, data) => {
         if (err) {
             res.send('err')
             console.log(err)
         } else {
-            res.send('ok')
-            console.log(data +"user successfully added")
+            res.send('ok zidane')
+            console.log(data,"user successfully added")
         }
     })
 }
@@ -41,20 +67,40 @@ exports.getUsers = (req, res, user) => {
       });
   
 }
-
+const accessTokenSecret = 'youraccesstokensecret';
 exports.userLogin = (req, res) => {
-    model = User;
+     model = User;
+   
+    
 
-  login = (req, res) => {
-    this.model.findOne({ username: req.body.username }, (err, user) => {
-      if (!user) { return res.sendStatus(403); }
-      user.comparePassword(req.body.password, (error, isMatch) => {
-        if (!isMatch) { return res.sendStatus(403); }
-        const token = jwt.sign({ user: user }, process.env.SECRET_TOKEN); // , { expiresIn: 10 } seconds
-        res.status(200).json({ token: token });
-      });
-    });
-  }
+//     const { username, password } = req.body;
+
+//         //Filter user from the users array by username and password
+//    const user = User.find(u => { return u.username === username && u.password === password });
+
+
+//     if (user) {
+//         // Generate an access token
+//         const accessToken = jwt.sign({ username: user.username,  password: user.password }, accessTokenSecret);
+
+//         res.json({
+//             accessToken
+//         });
+//     } else {
+//         res.send('Username or password incorrect');
+//         console.log("username or password incorrect");
+//     }
+
+ // login = (req, res) => {
+    // this.model.findOne({ username: req.body.username }, (err, user) => {
+    //   if (!user) { return res.sendStatus(403); }
+    //   user.comparePassword(req.body.password, (error, isMatch) => {
+    //     if (!isMatch) { return res.sendStatus(403); }
+    //     const token = jwt.sign({ user: user }, process.env.SECRET_TOKEN); // , { expiresIn: 10 } seconds
+    //     res.status(200).json({ token: token });
+    //   });
+    // });
+  //}
 
 }
 
@@ -121,4 +167,14 @@ exports.deleteUser = (req, res) => {
                 message: 'Could Not Delete A user'
             });
         });
+     
+        
 }
+dotenv.config();
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});

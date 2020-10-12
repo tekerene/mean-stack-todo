@@ -1,0 +1,19 @@
+
+<!-- *@Description: Create Todo Component
+    *@Date-created: sep 14 2020
+    *@Author: Teke Rene -->
+
+ <section class="todo-banner">
+  <div class="container-fluid">
+          <div class="main-banner col-12">
+            <div class="row">
+              <div class="col-md-5 create">
+                <app-create-todo></app-create-todo>
+              </div>
+              <div class="col-md-7 col-sm-12 col-xs-12 listTodo">
+                <app-list-todo (update)="onEditTodo($event)"></app-list-todo>
+              </div>
+          </div>
+      </div>
+  </div>
+</section> 

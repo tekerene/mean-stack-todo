@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Moment } from 'moment';
 import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { TodoService } from '../services/todo.service';
-import { Todo } from '../model/todo'
+import { TodoService } from '../../services/todo.service';
+import { Todo } from '../../model/todo'
 import * as moment from 'moment';  
 
 @Component({

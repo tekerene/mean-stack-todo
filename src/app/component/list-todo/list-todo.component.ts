@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {TodoService} from '../services/todo.service';
-import {Status} from '../model/status';
+import {TodoService} from '../../services/todo.service';
+import {Status} from '../../model/status';
 import * as moment from 'moment';
 
 @Component({selector: 'app-list-todo', 
@@ -88,7 +88,7 @@ export class ListTodoComponent  {
     * @Deleting a Todo
     */
     removeTodo(todo, index) {
-        if (window.confirm('Are you sure?')) {
+        if (window.confirm('this is rene deleting')) {
             this.todoService.deleteTodo(todo._id).subscribe((data) => {
                 this.todoData.splice(index, 1);
                 console.log(data + "************* Todo deleted successfully ***")

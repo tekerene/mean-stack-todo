@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { CreateTodoComponent } from './create-todo/create-todo.component';
-import { ListTodoComponent } from './list-todo/list-todo.component';
+import { CreateTodoComponent } from './component/create-todo/create-todo.component';
+import { ListTodoComponent } from './component/list-todo/list-todo.component';
 
 @Component({
   selector: 'app-root',

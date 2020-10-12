@@ -50,32 +50,26 @@
                 </div>
                 <button type="submit" [disabled]="signupForm.invalid" class="btn bg-info">Register</button>
                
-                <!-- <p>Already have an account</p> -->
+                <p>Already have an account <a href="/login">Login</a></p>
             </form>
         </div>
     </div>
 </section>
 
-<div class="table">
-    <thead>
-    <tr>
-    <th>id</th>
-    <th>fullname</th>
-    <th>username/<th>
-        <th>email</th>
-        <th>password</th>
-        </tr>
-    </thead>
+<button (click)="readUser()">view</button>
+<table class="table">
     <tbody>
         
         <tr *ngFor="let user of userList; let i = index">
             
             <td>{{user._id}}</td>
-            <td>{{user?.fullname}}</td>
-            <td>{{user?.username}}</td>
-            <td>{{user?.email}}</td>
-            <td>{{user?.password}}</td>
+            <td>{{user.fullname}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+            <td>{{user.confirmPassword}}</td>
+            <td (click)="deleteUser(user, i)" class="bg-danger">delete</td>
         </tr>
     </tbody>
     
-</div>
+</table>

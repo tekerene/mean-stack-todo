@@ -7,8 +7,7 @@ import { User } from '../model/user/user'
   providedIn: 'root'
 })
 export class UserService {
-  baseUrl = 'http://localhost:3009/';
-  public  Status: any;
+  baseUrl = 'http://localhost:3009/user';
   selectedUser: User;
   constructor(public http:HttpClient) { }
 ​
@@ -23,9 +22,12 @@ export class UserService {
   }
 ​
   //  adding a User
-  addUser(data: User):Observable<User[]>{
+  addUser(data):Observable<any>{
     const url = `${this.baseUrl}${endpoints.addUser}`;
-    return this.http.post<User[]>(url, data);
+    const requestOptions = Object.assign(
+      { responseType: 'text' }
+    );
+    return this.http.post<User[]>(url, data, requestOptions);
   }
   // Deleting a User 
   deleteUser(id):Observable<User[]>{
@@ -46,7 +48,9 @@ export class UserService {
   }
   login(credentials): Observable<any> {
     const url = `${this.baseUrl}${endpoints.userLogin}`;
-    return this.http.post<any>(url, credentials);
+    const requestOptions = Object.assign(
+      { responseType: 'text' });
+    return this.http.post<User[]>(url, credentials, requestOptions);
   }
   // upload image
   uploadImage(image){

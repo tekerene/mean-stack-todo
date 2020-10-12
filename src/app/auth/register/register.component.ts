@@ -43,26 +43,35 @@ credentials = {
 
   onSubmit() {
     this.model = this.signupForm.value;
+    console.log(this.model)
     this.userService.addUser(this.model).subscribe(
       result => {
         console.log(result);
-        if( !result) {
-          this.router.navigateByUrl('/login');
+        if(result) {
+          this.router.navigateByUrl('login');
+        } else {
+          console.log("could not login")
+
         }
       }
     )
-    window.location.reload();
+   // window.location.reload();
   }
 
-  // readUser(){
-  //   this.userService.getUsers().subscribe((data) => {
-  //      console.log(data)
-  //     this.userList = data;
-  //     this.userList.forEach(el => {
-  //       console.log(el)
-  //     });
-  //   })
-  // }
+  readUser(){
+    this.userService.getUsers().subscribe((data) => {
+       console.log(data)
+      this.userList = data;
+      this.userList.forEach(el => {
+       // console.log(el)
+      });
+    })
+  }
+  deleteUser(user, index){
+    this.userService. deleteUser(user._id).subscribe((data) => {
+      this.userList.splice(index, 1);
+    })
+  }
   // register() {
   //   this.userService.addUser(this.credentials).subscribe(() => {
   //     this.router.navigateByUrl('/home');
