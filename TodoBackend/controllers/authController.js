@@ -2,10 +2,14 @@ const User = require('../models/authModel');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const dotenv = require('dotenv');
+const _uAuth = require('lodash');
 const hashPassword = require('../config/passwordHarsh');
 const FacebookStrategy = require('passport-facebook').Strategy;;
-
+ 
 exports.addUser = (req, res) => {
+    const {fullname, username, email, password, confirmPassword} = req.body;
+    let hashPass = hashPassword.getHashPassword(password);
+    
      // * Create a Task
      const user = new User({
         fullname: req.body.fullname,
@@ -13,39 +17,28 @@ exports.addUser = (req, res) => {
         email: req.body.email,
         password: req.body.password,
         confirmPassword: req.body.confirmPassword,
-        
     })
     
-    const {fullname, username, email, password, confirmPassword} = req.body;
    
-    if (password === confirmPassword){
-        //check if users with the same email is also registered
-        if((!email === req.body.email)){
-        //   res.send("register", {
-        //       message: 'User already existed',
-        //       messageClass: 'alert-danger'
-        //   });  
-            console.log(email, "already exist")
-       
-          return;
-        
-        const hashPass = hashPassword.getHashPassword(password);
-        //store user into the database if you are using one
-        console.log(password);
-        User.push({
-            fullname, username, email, password: hashPass    
-        });
-    } 
-     } 
-     console.log(req.body);
-
+//     if (password === confirmPassword || hashPass === password){
+//         //check if users with the same email is also registered
+//         if((req.body.email === user.email)){
+//         //   res.send("register", {
+//         //       message: 'User already existed',
+//         //       messageClass: 'alert-danger'
+//         //   });  
+//             console.log(email, "already exist")
+     
+//     }   
+//     return;
+// }
     // Save user to database
     user.save((err, data) => {
         if (err) {
             res.send('err')
             console.log(err)
         } else {
-            res.send('ok zidane')
+            res.send('ok teke')
             console.log(data,"user successfully added")
         }
     })
@@ -68,11 +61,8 @@ exports.getUsers = (req, res, user) => {
   
 }
 const accessTokenSecret = 'youraccesstokensecret';
-exports.userLogin = (req, res) => {
-     model = User;
-   
-    
-
+exports.userLogin = (req, res, next) => {
+     
 //     const { username, password } = req.body;
 
 //         //Filter user from the users array by username and password
@@ -92,16 +82,20 @@ exports.userLogin = (req, res) => {
 //     }
 
  // login = (req, res) => {
-    // this.model.findOne({ username: req.body.username }, (err, user) => {
-    //   if (!user) { return res.sendStatus(403); }
-    //   user.comparePassword(req.body.password, (error, isMatch) => {
-    //     if (!isMatch) { return res.sendStatus(403); }
-    //     const token = jwt.sign({ user: user }, process.env.SECRET_TOKEN); // , { expiresIn: 10 } seconds
-    //     res.status(200).json({ token: token });
-    //   });
-    // });
-  //}
-
+   
+     User.findOne({ username: req.body.username },
+        (err, user) => {
+            if (!user)
+                return res.status(404).json({ status: false, message: 'User record not found.' });
+            else
+            console.log(user.username)
+            //return res.status(200);
+            
+            return res.status(200).json({ status: true, user : _uAuth.pick(user,['username','password']) });
+              
+        } 
+        
+    );
 }
 
 exports.getUser = (req, res) => {

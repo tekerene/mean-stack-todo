@@ -1,6 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { CreateTodoComponent } from './component/create-todo/create-todo.component';
 import { ListTodoComponent } from './component/list-todo/list-todo.component';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -13,14 +15,24 @@ export class AppComponent {
   private createTodo: CreateTodoComponent;
   //public createTodo = '';
   title = 'Todo';
- 
-  // onEditTodo($event: any) {
-  //   this.createTodo = $event;
-  //   }
+  userDetails: any;
   
+  constructor(private userService: UserService, private router: Router) { }
+  ngOnInit() {
+ 
+  }
 
-  onEditTodo(event: any) {
-  this.createTodo.onEditTodo(event);
+  checkUser(user){
+    this.userService.getUser(user._id).subscribe(res => {
+      this.userDetails = res['user'];
+    },err => {
+      console.log(err);
+    })
+  }
+ 
+  onLogout(user, index){
+    this.userService.deleteUser(user._id);
+    this.router.navigate(['/login']);
   }
 
 }

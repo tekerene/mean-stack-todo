@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
     username: '',
     password: ''
   }
+  serverErrorMessages: any;
+  
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) { }
 
 
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       console.log(user);
     }, (err) => {
       console.error(err);
+      this.serverErrorMessages = err.error.message;
     });
   console.log("login succesfully")
    }

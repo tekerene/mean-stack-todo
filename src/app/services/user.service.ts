@@ -1,16 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { endpoints } from '../auth/endpoint.config'
 import { User } from '../model/user/user'
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+   
   baseUrl = 'http://localhost:3009/user';
   selectedUser: User;
-  constructor(public http:HttpClient) { }
-​
+  //currentUser: any;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
+  constructor(public http:HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+   }
+  ​public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
   // getting all Users
   getUsers():Observable<User[]>{
     return this.http.get<User[]>(`${this.baseUrl}${endpoints.users}`);
@@ -30,7 +39,7 @@ export class UserService {
     return this.http.post<User[]>(url, data, requestOptions);
   }
   // Deleting a User 
-  deleteUser(id):Observable<User[]>{
+  deleteUser(id):Observable<any>{
     const url = `${this.baseUrl}${endpoints.deleteUser}${id}`;
     return this.http.delete<User[]>(url);
   }
@@ -56,4 +65,7 @@ export class UserService {
   uploadImage(image){
     return this.http.post(`${this.baseUrl}${endpoints.imageUpload}`, image);
   }
+  logout() {
+    throw new Error('Method not implemented.');
+}
 }

@@ -15,6 +15,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './component/home/home.component';
+import { UserService } from './services/user.service';
+import { AuthGuard } from './auth/_helper/auth.guard';
 
 
 @NgModule({
@@ -37,7 +39,7 @@ import { HomeComponent } from './component/home/home.component';
     FontAwesomeModule,
     CommonModule
   ],
-  providers: [TodoService],
+  providers: [TodoService, AuthGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
